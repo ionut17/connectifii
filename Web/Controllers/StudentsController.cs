@@ -31,9 +31,9 @@ namespace Web.Controllers
 
         // GET api/students/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public string Get(string id)
         {
-            return "value";
+            return Students.GetById(id).FirstName;
         }
 
         // POST api/students

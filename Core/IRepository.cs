@@ -6,6 +6,8 @@ namespace Core
     {
         IQueryable<T> GetAll();
 
+        T GetById(string id);
+
         void Create(T entity);
     }
 }

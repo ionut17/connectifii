@@ -5,6 +5,10 @@ namespace Core
 {
     public class Student : IEntity
     {
+        public Student()
+        {
+            
+        }
         public Student(string firstName, string lastName, int year, string group, DateTime birthDate)
         {
             RegistrationNumber = Guid.NewGuid().ToString();
