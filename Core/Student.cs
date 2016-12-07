@@ -5,13 +5,18 @@ namespace Core
 {
     public class Student : IEntity
     {
-        public Student(string firstName)
+        public Student(string firstName, string lastName, int year, string group, DateTime birthDate)
         {
+            RegistrationNumber = Guid.NewGuid().ToString();
             FirstName = firstName;
+            LastName = lastName;
+            Year = year;
+            Group = group;
+            BirthDate = birthDate;
         }
 
         [Key]
-        [StringLength(16)]
+        [StringLength(100)]
         public string RegistrationNumber { get; set; }
 
         [Required]
