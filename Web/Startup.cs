@@ -50,7 +50,14 @@ namespace Web
 
             app.UseApplicationInsightsExceptionTelemetry();
 
-            app.UseMvc();
+            //app.UseMvc();
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    "default",
+                    "{controller=Students}/{action=Get}/{id?}");
+            });
         }
     }
 }
