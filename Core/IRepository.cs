@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 namespace Core
 {
@@ -6,7 +7,7 @@ namespace Core
     {
         IQueryable<T> GetAll();
 
-        T GetById(string id);
+        T GetById(Guid id);
 
         void Create(T entity);
     }

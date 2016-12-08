@@ -18,16 +18,15 @@ namespace Infrastructure
             return Context.Set<T>();
         }
 
-        public T GetById(string id)
+        public T GetById(Guid id)
         {
             return Context.Find<T>(id);
         }
-        
+
         public void Create(T entity)
         {
             Context.Add(entity);
             Context.SaveChanges();
         }
-
     }
 }

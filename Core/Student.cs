@@ -1,17 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Core
 {
-    public class Student : IEntity
+    public class Student : Person
     {
         public Student()
         {
-            
         }
-        public Student(string firstName, string lastName, int year, string group, DateTime birthDate)
+
+        public Student(string registrationNumber, string firstName, string lastName, int year, string group,
+            DateTime birthDate, ICollection<Course> courses)
         {
-            RegistrationNumber = Guid.NewGuid().ToString();
+            Id = Guid.NewGuid();
+            RegistrationNumber = registrationNumber;
             FirstName = firstName;
             LastName = lastName;
             Year = year;
@@ -19,17 +22,8 @@ namespace Core
             BirthDate = birthDate;
         }
 
-        [Key]
-        [StringLength(100)]
+        [Required]
         public string RegistrationNumber { get; set; }
-
-        [Required]
-        [StringLength(20)]
-        public string FirstName { get; set; }
-
-        [Required]
-        [StringLength(20)]
-        public string LastName { get; set; }
 
         [Required]
         [MaxLength(1)]
@@ -39,7 +33,6 @@ namespace Core
         [StringLength(2)]
         public string Group { get; set; }
 
-        [Required]
-        public DateTime BirthDate { get; set; }
+        public virtual ICollection<Course> Courses { get; set; }
     }
 }

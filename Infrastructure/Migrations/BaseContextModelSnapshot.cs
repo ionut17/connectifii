@@ -2,13 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
-using Infrastructure;
 
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(BaseContext))]
-    partial class BaseContextModelSnapshot : ModelSnapshot
+    internal class BaseContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -17,32 +15,32 @@ namespace Infrastructure.Migrations
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Core.Student", b =>
-                {
-                    b.Property<string>("RegistrationNumber")
-                        .ValueGeneratedOnAdd()
-                        .HasMaxLength(100);
+            {
+                b.Property<string>("RegistrationNumber")
+                    .ValueGeneratedOnAdd()
+                    .HasMaxLength(100);
 
-                    b.Property<DateTime>("BirthDate");
+                b.Property<DateTime>("BirthDate");
 
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(20);
+                b.Property<string>("FirstName")
+                    .IsRequired()
+                    .HasMaxLength(20);
 
-                    b.Property<string>("Group")
-                        .IsRequired()
-                        .HasMaxLength(2);
+                b.Property<string>("Group")
+                    .IsRequired()
+                    .HasMaxLength(2);
 
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(20);
+                b.Property<string>("LastName")
+                    .IsRequired()
+                    .HasMaxLength(20);
 
-                    b.Property<int>("Year")
-                        .HasMaxLength(1);
+                b.Property<int>("Year")
+                    .HasMaxLength(1);
 
-                    b.HasKey("RegistrationNumber");
+                b.HasKey("RegistrationNumber");
 
-                    b.ToTable("Students");
-                });
+                b.ToTable("Students");
+            });
         }
     }
 }

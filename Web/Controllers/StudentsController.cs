@@ -13,11 +13,11 @@ namespace Web.Controllers
         public StudentsController()
         {
             Students = new StudentRepository();
-            Students.Create(new Student("Ionut", "Iacob", 3, "A5", DateTime.Now));
-            Students.Create(new Student("Anca", "Adascalitei", 3, "A5", DateTime.Now));
-            Students.Create(new Student("Stefan", "Gordin", 7, "A5", DateTime.Now));
-            Students.Create(new Student("Eveline", "Giosanu", 3, "A5", DateTime.Now));
-            Students.Create(new Student("Alexandra", "Gadioi", 3, "A2", DateTime.Now));
+//            Students.Create(new Student("Ionut", "Iacob", 3, "A5", DateTime.Now));
+//            Students.Create(new Student("Anca", "Adascalitei", 3, "A5", DateTime.Now));
+//            Students.Create(new Student("Stefan", "Gordin", 7, "A5", DateTime.Now));
+//            Students.Create(new Student("Eveline", "Giosanu", 3, "A5", DateTime.Now));
+//            Students.Create(new Student("Alexandra", "Gadioi", 3, "A2", DateTime.Now));
         }
 
         public StudentRepository Students { get; set; }
@@ -31,7 +31,7 @@ namespace Web.Controllers
 
         // GET api/students/5
         [HttpGet("{id}")]
-        public string Get(string id)
+        public string Get(Guid id)
         {
             return Students.GetById(id).FirstName;
         }
