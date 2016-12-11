@@ -20,7 +20,7 @@ namespace Infrastructure
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<TeacherCourse>().HasKey(x => new { x.CourseId, x.TeacherId });
+            modelBuilder.Entity<TeacherCourse>().HasKey(x => new {x.CourseId, x.TeacherId});
         }
     }
 }
