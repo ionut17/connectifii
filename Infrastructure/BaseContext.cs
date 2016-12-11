@@ -16,5 +16,11 @@ namespace Infrastructure
             base.OnConfiguring(optionsBuilder);
             optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=EntityModel;Trusted_Connection=True;");
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<TeacherCourse>().HasKey(x => new { x.CourseId, x.TeacherId });
+        }
     }
 }

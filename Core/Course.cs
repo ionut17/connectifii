@@ -6,12 +6,12 @@ namespace Core
 {
     public class Course : IEntity
     {
-        public Course(string title, int year, ICollection<Teacher> teachers)
+        public Course(string title, int year, ICollection<TeacherCourse> teachers)
         {
             Id = Guid.NewGuid();
             Title = title;
             Year = year;
-            Teachers = teachers;
+            TeacherCourse = teachers;
         }
 
         [Required]
@@ -22,7 +22,7 @@ namespace Core
         [MaxLength(1)]
         public int Year { get; set; }
 
-        public virtual ICollection<Teacher> Teachers { get; set; }
+        public virtual ICollection<TeacherCourse> TeacherCourse { get; set; }
 
         [Key]
         [Required]

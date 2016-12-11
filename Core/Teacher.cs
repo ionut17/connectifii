@@ -9,15 +9,15 @@ namespace Core
         {
         }
 
-        public Teacher(string firstName, string lastName, DateTime birthDate, ICollection<Course> courses)
+        public Teacher(string firstName, string lastName, DateTime birthDate, ICollection<TeacherCourse> courses)
         {
             Id = Guid.NewGuid();
             FirstName = firstName;
             LastName = lastName;
             BirthDate = birthDate;
-            Courses = courses;
+            TeacherCourse = courses;
         }
 
-        public virtual ICollection<Course> Courses { get; set; }
+        public virtual ICollection<TeacherCourse> TeacherCourse { get; set; }
     }
 }
