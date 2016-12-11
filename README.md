@@ -5,9 +5,9 @@ API de conectare la baza de date a FII
 Board: https://trello.com/b/bSoKHbkR
 
 # Cerinte generale
-- Sistem de prezenta
-- Sistem de notare
-- Adaptabil la mai multe materii simultan
+- Sistem autentificare
+- Baza de date
+- Sistem interogare date
 
 # Echipa
 - Adascalitei Anca Luiza
