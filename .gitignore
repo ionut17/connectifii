@@ -1,1 +1,9 @@
 .vs
+Core/bin/
+Core/obj/
+Infrastructure/bin/
+Infrastructure/obj/
+Test/bin/
+Test/obj/
+Web/bin/
+Web/obj/
