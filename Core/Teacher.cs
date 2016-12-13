@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Core
 {
-    public class Teacher : Person
+    public sealed class Teacher : Person
     {
         public Teacher()
         {
@@ -18,6 +18,6 @@ namespace Core
             TeacherCourse = courses;
         }
 
-        public virtual ICollection<TeacherCourse> TeacherCourse { get; set; }
+        public ICollection<TeacherCourse> TeacherCourse { get; set; }
     }
 }
