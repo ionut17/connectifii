@@ -14,13 +14,19 @@ namespace Web.Controllers
         [HttpGet]
         public ActionResult Get()
         {
-            return Json(Repository.GetAll().Select(s => Json(s)).ToArray());
+            var result = Repository.GetAll().Select(s => Json(s)).ToArray();
+            if (result.Length == 0)
+                return NotFound();
+            return Ok(Json(result));
         }
 
         [HttpGet("{id}")]
         public ActionResult Get(Guid id)
         {
-            return Json(Repository.GetById(id));
+            var result = Repository.GetById(id);
+            if (result == null)
+                return NotFound("Id " + id + " does not exist");
+            return Ok(Json(result));
         }
 
         // POST
