@@ -8,8 +8,6 @@ namespace Web.Controllers
         public StudentsController()
         {
             Repository = new StudentRepository();
-            
         }
-
     }
 }

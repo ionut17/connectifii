@@ -8,8 +8,8 @@ namespace Core
     {
         public Course()
         {
-            
         }
+
         public Course(string title, int year, ICollection<TeacherCourse> teachers)
         {
             Id = Guid.NewGuid();

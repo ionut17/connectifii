@@ -33,10 +33,8 @@ namespace Infrastructure
         public void DeleteAll()
         {
             foreach (var p in Context.Set<T>())
-            {
                 Context.Entry(p).State = EntityState.Deleted;
-            }
-           // Context.SaveChanges();
+                Context.SaveChanges();
         }
     }
 }
