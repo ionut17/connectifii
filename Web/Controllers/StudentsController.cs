@@ -12,22 +12,19 @@ namespace Web.Controllers
     {
         public StudentsController()
         {
-            Students = new StudentRepository();
-            ICollection<Course> empty = new List<Course>();
-            Students.Create(new Student("001", "Ionut", "Iacob", 3, "A5", DateTime.Now, empty));
-            Students.Create(new Student("002", "Anca", "Adascalitei", 3, "A5", DateTime.Now, empty));
-            Students.Create(new Student("003", "Stefan", "Gordin", 7, "A5", DateTime.Now, empty));
-            Students.Create(new Student("004", "Eveline", "Giosanu", 3, "A5", DateTime.Now, empty));
-            Students.Create(new Student("005", "Alexandra", "Gadioi", 3, "A2", DateTime.Now, empty));
+             Students = new StudentRepository();
         }
 
         public StudentRepository Students { get; set; }
 
         // GET api/students
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult Get()
         {
-            return Students.GetAll().Select(s => s.FirstName).ToArray();
+            var students = Students.GetAll().Select(s => s.FirstName).ToArray();
+            if (students == null)
+                return NoContent();
+            return Ok(students);
         }
 
         // GET api/students/5

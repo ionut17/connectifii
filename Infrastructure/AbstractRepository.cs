@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Core;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure
 {
@@ -27,6 +28,15 @@ namespace Infrastructure
         {
             Context.Add(entity);
             Context.SaveChanges();
+        }
+
+        public void DeleteAll()
+        {
+            foreach (var p in Context.Set<T>())
+            {
+                Context.Entry(p).State = EntityState.Deleted;
+            }
+           // Context.SaveChanges();
         }
     }
 }

@@ -6,6 +6,10 @@ namespace Core
 {
     public class Course : IEntity
     {
+        public Course()
+        {
+            
+        }
         public Course(string title, int year, ICollection<TeacherCourse> teachers)
         {
             Id = Guid.NewGuid();

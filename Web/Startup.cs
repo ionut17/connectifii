@@ -49,7 +49,7 @@ namespace Web
             {
                 routes.MapRoute(
                     "default",
-                    "{controller=Students}/{action=Get}/{id?}");
+                    "{controller=Data}/{action=Get}");
             });
         }
     }
