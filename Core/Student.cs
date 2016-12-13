@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Core
 {
-    public class Student : Person
+    public sealed class Student : Person
     {
         public Student()
         {
@@ -20,6 +20,7 @@ namespace Core
             Year = year;
             Group = group;
             BirthDate = birthDate;
+            Courses = courses;
         }
 
         [Required]
@@ -33,6 +34,6 @@ namespace Core
         [StringLength(2)]
         public string Group { get; set; }
 
-        public virtual ICollection<Course> Courses { get; set; }
+        public ICollection<Course> Courses { get; set; }
     }
 }

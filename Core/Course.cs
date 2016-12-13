@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Core
 {
-    public class Course : IEntity
+    public sealed class Course : IEntity
     {
         public Course(string title, int year, ICollection<TeacherCourse> teachers)
         {
@@ -22,7 +22,7 @@ namespace Core
         [MaxLength(1)]
         public int Year { get; set; }
 
-        public virtual ICollection<TeacherCourse> TeacherCourse { get; set; }
+        public ICollection<TeacherCourse> TeacherCourse { get; set; }
 
         [Key]
         [Required]
