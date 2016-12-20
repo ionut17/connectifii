@@ -2,7 +2,7 @@
 
 namespace Infrastructure.Migrations
 {
-    public partial class AddedGroup : Migration
+    public partial class testing5 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

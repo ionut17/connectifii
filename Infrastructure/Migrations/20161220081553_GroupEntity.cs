@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Infrastructure.Migrations
@@ -9,37 +8,34 @@ namespace Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Group",
-                table: "Students");
+                "Group",
+                "Students");
 
             migrationBuilder.AddColumn<Guid>(
-                name: "GroupId",
-                table: "Students",
+                "GroupId",
+                "Students",
                 nullable: false,
                 defaultValue: new Guid("00000000-0000-0000-0000-000000000000"));
 
             migrationBuilder.CreateTable(
-                name: "Group",
-                columns: table => new
+                "Group",
+                table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(maxLength: 2, nullable: false)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Group", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_Group", x => x.Id); });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Students_GroupId",
-                table: "Students",
-                column: "GroupId");
+                "IX_Students_GroupId",
+                "Students",
+                "GroupId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Students_Group_GroupId",
-                table: "Students",
-                column: "GroupId",
-                principalTable: "Group",
+                "FK_Students_Group_GroupId",
+                "Students",
+                "GroupId",
+                "Group",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
         }
@@ -47,23 +43,23 @@ namespace Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Students_Group_GroupId",
-                table: "Students");
+                "FK_Students_Group_GroupId",
+                "Students");
 
             migrationBuilder.DropTable(
-                name: "Group");
+                "Group");
 
             migrationBuilder.DropIndex(
-                name: "IX_Students_GroupId",
-                table: "Students");
+                "IX_Students_GroupId",
+                "Students");
 
             migrationBuilder.DropColumn(
-                name: "GroupId",
-                table: "Students");
+                "GroupId",
+                "Students");
 
             migrationBuilder.AddColumn<string>(
-                name: "Group",
-                table: "Students",
+                "Group",
+                "Students",
                 maxLength: 2,
                 nullable: false,
                 defaultValue: "");

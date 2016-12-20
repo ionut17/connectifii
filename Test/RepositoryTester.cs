@@ -10,14 +10,14 @@ namespace Test
     [TestClass]
     public class RepositoryTester
     {
-        private ICollection<Course> empty;
+        private ICollection<StudentCourse> empty;
         private AbstractRepository<Student> repository;
         private Student student;
 
         [TestInitialize]
         public void SetUp()
         {
-            empty = new List<Course>();
+            empty = new List<StudentCourse>();
             student = new Student("007", "John", "McDonalds", 3, new Group("D3"), DateTime.Now, empty);
         }
 

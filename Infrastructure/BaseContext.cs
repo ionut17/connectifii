@@ -21,6 +21,7 @@ namespace Infrastructure
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<TeacherCourse>().HasKey(x => new {x.CourseId, x.TeacherId});
+            modelBuilder.Entity<StudentCourse>().HasKey(x => new {x.CourseId, x.StudentId});
         }
     }
 }

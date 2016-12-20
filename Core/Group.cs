@@ -8,10 +8,9 @@ namespace Core
     {
         public Group()
         {
-            
         }
 
-    public Group(string name)
+        public Group(string name)
         {
             Id = Guid.NewGuid();
             Name = name;

@@ -30,14 +30,14 @@ namespace Web.Controllers
             var result = StudentRepository.GetByRegistrationNumber(registrationNumber);
             if (result == null)
                 return NotFound("Registration number " + registrationNumber + " does not exist");
-            return Ok(result.StudentCourses.Select(sc => sc.Course));
+            return Ok(result);
         }
 
         [HttpGet("{registrationNumber}/courses/{courseId}")]
         public IActionResult GetCourse(string registrationNumber, Guid courseId)
         {
             var result = StudentRepository.GetByRegistrationNumber(registrationNumber);
-            if(result == null)
+            if (result == null)
                 return NotFound("Registration number " + registrationNumber + " does not exist");
             return Ok(result.StudentCourses.Select(sc => sc.Course).Where(c => c.Id == courseId));
         }
