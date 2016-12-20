@@ -10,7 +10,7 @@ namespace Core
         {
         }
 
-        public Student(string registrationNumber, string firstName, string lastName, int year, string group,
+        public Student(string registrationNumber, string firstName, string lastName, int year, Group group,
             DateTime birthDate, ICollection<Course> courses)
         {
             Id = Guid.NewGuid();
@@ -31,8 +31,7 @@ namespace Core
         public int Year { get; set; }
 
         [Required]
-        [StringLength(2)]
-        public string Group { get; set; }
+        public Group Group { get; set; }
 
         public ICollection<Course> Courses { get; set; }
     }
