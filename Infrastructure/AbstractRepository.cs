@@ -32,7 +32,10 @@ namespace Infrastructure
 
         public void DeleteAll()
         {
-            foreach (var p in Context.Set<T>())
+            var data = Context.Set<T>();
+            if (data == null)
+                return;
+            foreach (var p in data)
                 Context.Entry(p).State = EntityState.Deleted;
             Context.SaveChanges();
         }

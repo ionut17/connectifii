@@ -18,7 +18,7 @@ namespace Test
         public void SetUp()
         {
             empty = new List<Course>();
-            student = new Student("007", "John", "McDonalds", 3, "D3", DateTime.Now, empty);
+            student = new Student("007", "John", "McDonalds", 3, new Group("D3"), DateTime.Now, empty);
         }
 
         [TestMethod]
