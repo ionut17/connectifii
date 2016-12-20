@@ -21,7 +21,12 @@ namespace Web.Controllers
 
             var teacher = new Teacher(teacherDto);
 
-            if (Repository.GetAll().Any(t => t.LastName.Equals(teacher.LastName) && t.FirstName.Equals(teacher.FirstName) && t.BirthDate == teacher.BirthDate))
+            if (
+                Repository.GetAll()
+                    .Any(
+                        t =>
+                            t.LastName.Equals(teacher.LastName) && t.FirstName.Equals(teacher.FirstName) &&
+                            (t.BirthDate == teacher.BirthDate)))
                 return BadRequest("Teacher already in DB.");
 
             if (!ModelState.IsValid)
