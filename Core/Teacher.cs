@@ -18,6 +18,6 @@ namespace Core
             TeacherCourse = courses;
         }
 
-        public ICollection<TeacherCourse> TeacherCourse { get; set; }
+        public ICollection<TeacherCourse> TeacherCourse { get; set; } = new List<TeacherCourse>();
     }
 }

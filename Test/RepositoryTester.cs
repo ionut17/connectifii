@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using Core;
+using FluentAssertions;
 using Infrastructure;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using FluentAssertions;
 
 namespace Test
 {
     [TestClass]
     public class RepositoryTester
     {
+        private ICollection<Course> empty;
         private AbstractRepository<Student> repository;
         private Student student;
-        private ICollection<Course> empty;
 
         [TestInitialize]
         public void SetUp()
@@ -26,7 +26,6 @@ namespace Test
         {
             AbstractRepository<Student> repository = CreateSut();
             repository.Context.Should().NotBeNull();
-
         }
 
         [TestMethod]
@@ -44,7 +43,6 @@ namespace Test
         [TestMethod]
         public void When_GetAllIsCalled_Then_ShoulReturnNotEmpty()
         {
-
             AbstractRepository<Student> repository = CreateSut();
 
             var result = repository.GetAll();
@@ -61,7 +59,6 @@ namespace Test
             var exists = repository.GetById(student.Id);
 
             exists.Should().NotBeNull();
-
         }
 
         /* 

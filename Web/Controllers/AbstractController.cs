@@ -12,21 +12,21 @@ namespace Web.Controllers
         public AbstractRepository<T> Repository;
 
         [HttpGet]
-        public ActionResult Get()
+        public IActionResult Get()
         {
-            var result = Repository.GetAll().Select(s => Json(s)).ToArray();
+            var result = Repository.GetAll().ToArray();
             if (result.Length == 0)
                 return NotFound();
-            return Ok(Json(result));
+            return Ok(result);
         }
 
         [HttpGet("{id}")]
-        public ActionResult Get(Guid id)
+        public IActionResult Get(Guid id)
         {
             var result = Repository.GetById(id);
             if (result == null)
                 return NotFound("Id " + id + " does not exist");
-            return Ok(Json(result));
+            return Ok(result);
         }
 
         // POST
