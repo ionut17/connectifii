@@ -20,19 +20,13 @@ namespace Web.Controllers
             return Ok(Json(result));
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetResource[controller]")]
         public ActionResult Get(Guid id)
         {
             var result = Repository.GetById(id);
             if (result == null)
                 return NotFound("Id " + id + " does not exist");
             return Ok(Json(result));
-        }
-
-        // POST
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
         }
 
         // PUT
