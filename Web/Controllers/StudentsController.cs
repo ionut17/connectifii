@@ -30,7 +30,7 @@ namespace Web.Controllers
             var result = StudentRepository.GetByRegistrationNumber(registrationNumber);
             if (result == null)
                 return NotFound("Registration number " + registrationNumber + " does not exist");
-            return Ok(result);
+            return Ok(result.StudentCourses);
         }
 
         [HttpGet("{registrationNumber}/courses/{courseId}")]

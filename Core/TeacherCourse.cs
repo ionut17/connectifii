@@ -10,12 +10,11 @@ namespace Core
 
         [Required]
         public Teacher Teacher { get; set; }
-        
+
         [Required]
         public Guid CourseId { get; set; }
 
         [Required]
         public Course Course { get; set; }
-
     }
 }

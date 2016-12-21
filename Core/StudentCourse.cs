@@ -16,6 +16,5 @@ namespace Core
 
         [Required]
         public Course Course { get; set; }
-
     }
 }
