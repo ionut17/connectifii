@@ -19,6 +19,13 @@ namespace Core
             StudentCourse = students;
         }
 
+        public Course(CourseDto courseDto)
+        {
+            Id = Guid.NewGuid();
+            Title = courseDto.Title;
+            Year = courseDto.Year;
+        }
+
         [Required]
         [MaxLength(30)]
         public string Title { get; set; }
