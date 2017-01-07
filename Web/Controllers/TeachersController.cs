@@ -51,7 +51,7 @@ namespace Web.Controllers
                 BirthDate = entity.BirthDate
             };
             Repository.Update(teacher);
-            return CreatedAtRoute("GetResourcecourses", new { id = id }, teacher);
+            return CreatedAtRoute("GetResourcecourses", new {id}, teacher);
         }
     }
 }

@@ -43,7 +43,7 @@ namespace Web.Controllers
                 Year = entity.Year
             };
             Repository.Update(newCourse);
-            return CreatedAtRoute("GetResourcecourses", new {id = id}, newCourse);
+            return CreatedAtRoute("GetResourcecourses", new {id}, newCourse);
         }
     }
 }

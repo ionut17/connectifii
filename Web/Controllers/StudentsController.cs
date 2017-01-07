@@ -66,6 +66,7 @@ namespace Web.Controllers
 
             return CreatedAtRoute("GetResourceStudents", new {id = newId}, entity);
         }
+
         [HttpPut("{id}")]
         public void Put(Guid id, [FromBody] StudentDTO entity)
         {
@@ -83,10 +84,9 @@ namespace Web.Controllers
         [HttpDelete("{id}")]
         public void Delete(Guid id)
         {
-            Student currentStudent = Repository.GetById(id);
+            var currentStudent = Repository.GetById(id);
             Repository.Delete(currentStudent);
         }
-
     }
 }
 
