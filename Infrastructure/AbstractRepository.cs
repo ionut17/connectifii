@@ -24,9 +24,21 @@ namespace Infrastructure
             return Context.Find<T>(id);
         }
 
+        public void Update(T entity)
+        {
+            Context.Update(entity);
+            Context.SaveChanges();
+        }
+
         public void Create(T entity)
         {
             Context.Add(entity);
+            Context.SaveChanges();
+        }
+
+        public void Delete(T entity)
+        {
+            Context.Remove(entity);
             Context.SaveChanges();
         }
 
