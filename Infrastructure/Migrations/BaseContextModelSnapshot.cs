@@ -42,7 +42,12 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasMaxLength(2);
 
+                    b.Property<int>("Year")
+                        .HasMaxLength(1);
+
                     b.HasKey("Id");
+
+                    b.HasAlternateKey("Year", "Name");
 
                     b.ToTable("Groups");
                 });
@@ -66,9 +71,6 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("RegistrationNumber")
                         .IsRequired();
-
-                    b.Property<int>("Year")
-                        .HasMaxLength(1);
 
                     b.HasKey("Id");
 

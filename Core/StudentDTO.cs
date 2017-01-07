@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Core
 {
     public class StudentDTO
     {
-
         [Required]
         public string RegistrationNumber { get; set; }
 
@@ -22,10 +18,5 @@ namespace Core
 
         [Required]
         public DateTime BirthDate { get; set; }
-
-        [Required]
-        [Range(0, 9)]
-        public int Year { get; set; }
-
     }
 }

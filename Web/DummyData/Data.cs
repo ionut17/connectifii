@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Core;
 using Infrastructure;
 
@@ -11,11 +10,11 @@ namespace Web.DummyData
         {
             var studentRepository = new StudentRepository();
             studentRepository.DeleteAll();
-            var student = new Student("001", "Ionut", "Iacob", 3, new Group("A5"), DateTime.Now);
-            studentRepository.Create(new Student("002", "Anca", "Adascalitei", 3, new Group("A5"), DateTime.Now));
-            studentRepository.Create(new Student("003", "Stefan", "Gordin", 7, new Group("A5"), DateTime.Now));
-            studentRepository.Create(new Student("004", "Eveline", "Giosanu", 3, new Group("A5"), DateTime.Now));
-            studentRepository.Create(new Student("005", "Alexandra", "Gadioi", 3, new Group("A2"), DateTime.Now));
+            var student = new Student("001", "Ionut", "Iacob", new Group("A5", 3), DateTime.Now);
+            studentRepository.Create(new Student("002", "Anca", "Adascalitei", new Group("A5",6), DateTime.Now));
+            studentRepository.Create(new Student("003", "Stefan", "Gordin", new Group("A5",2), DateTime.Now));
+            studentRepository.Create(new Student("004", "Eveline", "Giosanu", new Group("A5", 5), DateTime.Now));
+            studentRepository.Create(new Student("005", "Alexandra", "Gadioi", new Group("A2", 1), DateTime.Now));
         }
 
         public static void AddCourses()
@@ -40,9 +39,9 @@ namespace Web.DummyData
         {
             var groupRepository = new GroupRepository();
             groupRepository.DeleteAll();
-            groupRepository.Create(new Group("A5"));
-            groupRepository.Create(new Group("A1"));
-            groupRepository.Create(new Group("A4"));
+            groupRepository.Create(new Group("A5", 3));
+            groupRepository.Create(new Group("A1", 3));
+            groupRepository.Create(new Group("A4", 3));
         }
     }
 }

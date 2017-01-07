@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Linq;
-using System.Collections.Generic;
 using Core;
 using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
@@ -49,14 +46,10 @@ namespace Web.Controllers
         public IActionResult Create([FromBody] StudentDTO entity)
         {
             if (entity == null)
-            {
                 return NotFound();
-            }
 
             if (!ModelState.IsValid)
-            {
                 return BadRequest(ModelState);
-            }
 
             //TODO solve conflict at inserting group (not allowing null)
             var newId = new Guid();
@@ -66,18 +59,15 @@ namespace Web.Controllers
                 FirstName = entity.FirstName,
                 LastName = entity.LastName,
                 BirthDate = entity.BirthDate,
-                RegistrationNumber = entity.RegistrationNumber,
-                Year = entity.Year
+                RegistrationNumber = entity.RegistrationNumber
             };
 
             Repository.Create(newStudent);
 
-            return CreatedAtRoute("GetResourceStudents", new { id = newId }, entity);
+            return CreatedAtRoute("GetResourceStudents", new {id = newId}, entity);
         }
-
     }
 }
-
 
 /*
  [HttpPost]

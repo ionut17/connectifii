@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Core;
 using FluentAssertions;
 using Infrastructure;
@@ -16,7 +15,7 @@ namespace Test
         [TestInitialize]
         public void SetUp()
         {
-            student = new Student("007", "John", "McDonalds", 3, new Group("D3"), DateTime.Now);
+            student = new Student("007", "John", "McDonalds",  new Group("D3", 2), DateTime.Now);
         }
 
         [TestMethod]

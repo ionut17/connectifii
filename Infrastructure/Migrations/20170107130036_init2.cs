@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Infrastructure.Migrations
 {
@@ -9,27 +7,27 @@ namespace Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Students_Group_GroupId",
-                table: "Students");
+                "FK_Students_Group_GroupId",
+                "Students");
 
             migrationBuilder.DropPrimaryKey(
-                name: "PK_Group",
-                table: "Group");
+                "PK_Group",
+                "Group");
 
             migrationBuilder.RenameTable(
-                name: "Group",
+                "Group",
                 newName: "Groups");
 
             migrationBuilder.AddPrimaryKey(
-                name: "PK_Groups",
-                table: "Groups",
-                column: "Id");
+                "PK_Groups",
+                "Groups",
+                "Id");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Students_Groups_GroupId",
-                table: "Students",
-                column: "GroupId",
-                principalTable: "Groups",
+                "FK_Students_Groups_GroupId",
+                "Students",
+                "GroupId",
+                "Groups",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Restrict);
         }
@@ -37,27 +35,27 @@ namespace Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Students_Groups_GroupId",
-                table: "Students");
+                "FK_Students_Groups_GroupId",
+                "Students");
 
             migrationBuilder.DropPrimaryKey(
-                name: "PK_Groups",
-                table: "Groups");
+                "PK_Groups",
+                "Groups");
 
             migrationBuilder.RenameTable(
-                name: "Groups",
+                "Groups",
                 newName: "Group");
 
             migrationBuilder.AddPrimaryKey(
-                name: "PK_Group",
-                table: "Group",
-                column: "Id");
+                "PK_Group",
+                "Group",
+                "Id");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Students_Group_GroupId",
-                table: "Students",
-                column: "GroupId",
-                principalTable: "Group",
+                "FK_Students_Group_GroupId",
+                "Students",
+                "GroupId",
+                "Group",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Restrict);
         }
