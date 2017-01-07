@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Core
 {
@@ -25,6 +24,5 @@ namespace Core
             LastName = teacherDto.LastName;
             BirthDate = teacherDto.BirthDate;
         }
-       
     }
 }

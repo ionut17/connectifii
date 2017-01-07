@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Core
@@ -16,6 +15,5 @@ namespace Core
 
         [Required]
         public DateTime BirthDate { get; set; }
-
     }
 }

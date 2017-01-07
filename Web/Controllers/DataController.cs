@@ -13,6 +13,7 @@ namespace Web.Controllers
             Data.AddTeachers();
             //Data.AddGroups();
             Data.AddStudents();
+
             return Ok("Succesfully reset data.");
         }
     }
