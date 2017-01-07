@@ -66,8 +66,6 @@ namespace Web.Controllers
                 FirstName = entity.FirstName,
                 LastName = entity.LastName,
                 BirthDate = entity.BirthDate,
-                Courses = entity.Courses == null ? new List<Course>() : entity.Courses,
-                Group = entity.Group == null ? new Group() : entity.Group,
                 RegistrationNumber = entity.RegistrationNumber,
                 Year = entity.Year
             };
