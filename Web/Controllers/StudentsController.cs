@@ -75,8 +75,7 @@ namespace Web.Controllers
                 FirstName = entity.FirstName,
                 LastName = entity.LastName,
                 BirthDate = entity.BirthDate,
-                RegistrationNumber = entity.RegistrationNumber,
-                Year = entity.Year
+                RegistrationNumber = entity.RegistrationNumber
             };
             Repository.Update(newStudent);
         }

@@ -26,7 +26,6 @@ namespace Infrastructure
             {
                 group.Year,
                 group.Name
-
             });
         }
     }

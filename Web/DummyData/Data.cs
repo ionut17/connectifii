@@ -10,6 +10,7 @@ namespace Web.DummyData
         {
             var studentRepository = new StudentRepository();
             studentRepository.DeleteAll();
+            DeleteGroups();
             var student = new Student("001", "Ionut", "Iacob", new Group("A5", 3), DateTime.Now);
             studentRepository.Create(new Student("002", "Anca", "Adascalitei", new Group("A5",6), DateTime.Now));
             studentRepository.Create(new Student("003", "Stefan", "Gordin", new Group("A5",2), DateTime.Now));
@@ -35,13 +36,13 @@ namespace Web.DummyData
             teacherRepository.Create(new Teacher("Cosmin", "Varlan", DateTime.Now));
         }
 
-        public static void AddGroups()
+        public static void DeleteGroups()
         {
             var groupRepository = new GroupRepository();
             groupRepository.DeleteAll();
-            groupRepository.Create(new Group("A5", 3));
+/*            groupRepository.Create(new Group("A5", 3));
             groupRepository.Create(new Group("A1", 3));
-            groupRepository.Create(new Group("A4", 3));
+            groupRepository.Create(new Group("A4", 3));*/
         }
     }
 }
