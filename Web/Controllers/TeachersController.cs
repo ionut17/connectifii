@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Core;
 using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
@@ -34,6 +35,23 @@ namespace Web.Controllers
 
             Repository.Create(teacher);
             return CreatedAtRoute("GetResourceteachers", new {id = teacher.Id}, teacher);
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult Put(Guid id, [FromBody] TeacherDto entity)
+        {
+            if (entity == null)
+                return BadRequest();
+
+            var teacher = new Teacher
+            {
+                Id = id,
+                LastName = entity.LastName,
+                FirstName = entity.FirstName,
+                BirthDate = entity.BirthDate
+            };
+            Repository.Update(teacher);
+            return CreatedAtRoute("GetResourcecourses", new { id = id }, teacher);
         }
     }
 }

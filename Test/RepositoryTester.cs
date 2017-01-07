@@ -15,7 +15,7 @@ namespace Test
         [TestInitialize]
         public void SetUp()
         {
-            student = new Student("007", "John", "McDonalds",  new Group("D3", 2), DateTime.Now);
+            student = new Student("007", "John", "McDonalds", new Group("D3", 2), DateTime.Now);
         }
 
         [TestMethod]

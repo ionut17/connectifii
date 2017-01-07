@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Infrastructure.Migrations
 {
@@ -9,35 +7,35 @@ namespace Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Year",
-                table: "Students");
+                "Year",
+                "Students");
 
             migrationBuilder.AddColumn<int>(
-                name: "Year",
-                table: "Groups",
+                "Year",
+                "Groups",
                 maxLength: 1,
                 nullable: false,
                 defaultValue: 0);
 
             migrationBuilder.AddUniqueConstraint(
-                name: "AK_Groups_Year_Name",
-                table: "Groups",
-                columns: new[] { "Year", "Name" });
+                "AK_Groups_Year_Name",
+                "Groups",
+                new[] {"Year", "Name"});
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropUniqueConstraint(
-                name: "AK_Groups_Year_Name",
-                table: "Groups");
+                "AK_Groups_Year_Name",
+                "Groups");
 
             migrationBuilder.DropColumn(
-                name: "Year",
-                table: "Groups");
+                "Year",
+                "Groups");
 
             migrationBuilder.AddColumn<int>(
-                name: "Year",
-                table: "Students",
+                "Year",
+                "Students",
                 maxLength: 1,
                 nullable: false,
                 defaultValue: 0);

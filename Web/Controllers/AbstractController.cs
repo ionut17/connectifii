@@ -28,17 +28,5 @@ namespace Web.Controllers
                 return NotFound("Id " + id + " does not exist");
             return Ok(result);
         }
-
-        // PUT
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }
