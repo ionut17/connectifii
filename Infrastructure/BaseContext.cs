@@ -11,6 +11,8 @@ namespace Infrastructure
 
         public DbSet<Course> Courses { get; set; }
 
+        public DbSet<Group> Groups { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
@@ -20,8 +22,6 @@ namespace Infrastructure
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<TeacherCourse>().HasKey(x => new {x.CourseId, x.TeacherId});
-            modelBuilder.Entity<StudentCourse>().HasKey(x => new {x.CourseId, x.StudentId});
         }
     }
 }

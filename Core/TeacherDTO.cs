@@ -17,6 +17,5 @@ namespace Core
         [Required]
         public DateTime BirthDate { get; set; }
 
-        public ICollection<TeacherCourse> TeacherCourse { get; set; }
     }
 }

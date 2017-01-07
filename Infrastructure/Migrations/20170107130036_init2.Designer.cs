@@ -8,8 +8,8 @@ using Infrastructure;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(BaseContext))]
-    [Migration("20161220175058_testing2")]
-    partial class testing2
+    [Migration("20170107130036_init2")]
+    partial class init2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -45,7 +45,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Group");
+                    b.ToTable("Groups");
                 });
 
             modelBuilder.Entity("Core.Student", b =>
@@ -59,7 +59,7 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasMaxLength(20);
 
-                    b.Property<Guid>("GroupId");
+                    b.Property<Guid?>("GroupId");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -76,19 +76,6 @@ namespace Infrastructure.Migrations
                     b.HasIndex("GroupId");
 
                     b.ToTable("Students");
-                });
-
-            modelBuilder.Entity("Core.StudentCourse", b =>
-                {
-                    b.Property<Guid>("CourseId");
-
-                    b.Property<Guid>("StudentId");
-
-                    b.HasKey("CourseId", "StudentId");
-
-                    b.HasIndex("StudentId");
-
-                    b.ToTable("StudentCourse");
                 });
 
             modelBuilder.Entity("Core.Teacher", b =>
@@ -111,57 +98,11 @@ namespace Infrastructure.Migrations
                     b.ToTable("Teachers");
                 });
 
-            modelBuilder.Entity("Core.TeacherCourse", b =>
-                {
-                    b.Property<Guid>("CourseId");
-
-                    b.Property<Guid>("TeacherId");
-
-                    b.Property<Guid>("CourseId1");
-
-                    b.HasKey("CourseId", "TeacherId");
-
-                    b.HasAlternateKey("CourseId");
-
-                    b.HasIndex("CourseId1");
-
-                    b.HasIndex("TeacherId");
-
-                    b.ToTable("TeacherCourse");
-                });
-
             modelBuilder.Entity("Core.Student", b =>
                 {
                     b.HasOne("Core.Group", "Group")
-                        .WithMany("Students")
-                        .HasForeignKey("GroupId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Core.StudentCourse", b =>
-                {
-                    b.HasOne("Core.Course", "Course")
-                        .WithMany("StudentCourse")
-                        .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Core.Student", "Student")
-                        .WithMany("StudentCourses")
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Core.TeacherCourse", b =>
-                {
-                    b.HasOne("Core.Course", "Course")
-                        .WithMany("TeacherCourse")
-                        .HasForeignKey("CourseId1")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Core.Teacher", "Teacher")
-                        .WithMany("TeacherCourse")
-                        .HasForeignKey("TeacherId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .WithMany()
+                        .HasForeignKey("GroupId");
                 });
         }
     }

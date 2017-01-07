@@ -10,13 +10,12 @@ namespace Core
         }
 
         //util deocamdata doar pentru Dummy Data => posibil sa fie sters
-        public Teacher(string firstName, string lastName, DateTime birthDate, ICollection<TeacherCourse> courses)
+        public Teacher(string firstName, string lastName, DateTime birthDate)
         {
             Id = Guid.NewGuid();
             FirstName = firstName;
             LastName = lastName;
             BirthDate = birthDate;
-            TeacherCourse = courses;
         }
 
         public Teacher(TeacherDto teacherDto)
@@ -26,7 +25,6 @@ namespace Core
             LastName = teacherDto.LastName;
             BirthDate = teacherDto.BirthDate;
         }
-
-        public ICollection<TeacherCourse> TeacherCourse { get; set; } = new List<TeacherCourse>();
+       
     }
 }

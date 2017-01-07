@@ -11,7 +11,7 @@ namespace Core
         }
 
         public Student(string registrationNumber, string firstName, string lastName, int year, Group group,
-            DateTime birthDate, ICollection<StudentCourse> courses)
+            DateTime birthDate)
         {
             Id = Guid.NewGuid();
             RegistrationNumber = registrationNumber;
@@ -20,7 +20,6 @@ namespace Core
             Year = year;
             Group = group;
             BirthDate = birthDate;
-            StudentCourses = courses;
         }
 
         [Required]
@@ -30,9 +29,7 @@ namespace Core
         [MaxLength(1)]
         public int Year { get; set; }
 
-        [Required]
         public Group Group { get; set; }
-
-        public ICollection<StudentCourse> StudentCourses { get; set; } = new List<StudentCourse>();
+       
     }
 }

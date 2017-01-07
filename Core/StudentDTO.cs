@@ -27,9 +27,5 @@ namespace Core
         [Range(0, 9)]
         public int Year { get; set; }
 
-        public Group Group { get; set; }
-
-        public ICollection<Course> Courses { get; set; }
-
     }
 }

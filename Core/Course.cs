@@ -10,13 +10,11 @@ namespace Core
         {
         }
 
-        public Course(string title, int year, ICollection<TeacherCourse> teachers, ICollection<StudentCourse> students)
+        public Course(string title, int year)
         {
             Id = Guid.NewGuid();
             Title = title;
             Year = year;
-            TeacherCourse = teachers;
-            StudentCourse = students;
         }
 
         public Course(CourseDto courseDto)
@@ -33,9 +31,6 @@ namespace Core
         [Required]
         [MaxLength(1)]
         public int Year { get; set; }
-
-        public ICollection<TeacherCourse> TeacherCourse { get; set; } = new List<TeacherCourse>();
-        public ICollection<StudentCourse> StudentCourse { get; set; } = new List<StudentCourse>();
 
         [Key]
         [Required]

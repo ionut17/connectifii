@@ -20,8 +20,6 @@ namespace Core
         [StringLength(2)]
         public string Name { get; set; }
 
-        public ICollection<Student> Students { get; set; }
-
         public Guid Id { get; set; }
     }
 }

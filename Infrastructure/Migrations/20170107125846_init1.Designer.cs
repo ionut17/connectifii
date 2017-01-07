@@ -8,8 +8,8 @@ using Infrastructure;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(BaseContext))]
-    [Migration("20161220082437_AddedGroup")]
-    partial class AddedGroup
+    [Migration("20170107125846_init1")]
+    partial class init1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -22,8 +22,6 @@ namespace Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid?>("StudentId");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(30);
@@ -32,8 +30,6 @@ namespace Infrastructure.Migrations
                         .HasMaxLength(1);
 
                     b.HasKey("Id");
-
-                    b.HasIndex("StudentId");
 
                     b.ToTable("Courses");
                 });
@@ -63,7 +59,7 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasMaxLength(20);
 
-                    b.Property<Guid>("GroupId");
+                    b.Property<Guid?>("GroupId");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -102,51 +98,11 @@ namespace Infrastructure.Migrations
                     b.ToTable("Teachers");
                 });
 
-            modelBuilder.Entity("Core.TeacherCourse", b =>
-                {
-                    b.Property<Guid>("CourseId");
-
-                    b.Property<Guid>("TeacherId");
-
-                    b.Property<Guid>("CourseId1");
-
-                    b.HasKey("CourseId", "TeacherId");
-
-                    b.HasAlternateKey("CourseId");
-
-                    b.HasIndex("CourseId1");
-
-                    b.HasIndex("TeacherId");
-
-                    b.ToTable("TeacherCourse");
-                });
-
-            modelBuilder.Entity("Core.Course", b =>
-                {
-                    b.HasOne("Core.Student")
-                        .WithMany("Courses")
-                        .HasForeignKey("StudentId");
-                });
-
             modelBuilder.Entity("Core.Student", b =>
                 {
                     b.HasOne("Core.Group", "Group")
-                        .WithMany("Students")
-                        .HasForeignKey("GroupId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Core.TeacherCourse", b =>
-                {
-                    b.HasOne("Core.Course", "Course")
-                        .WithMany("TeacherCourse")
-                        .HasForeignKey("CourseId1")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Core.Teacher", "Teacher")
-                        .WithMany("TeacherCourse")
-                        .HasForeignKey("TeacherId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .WithMany()
+                        .HasForeignKey("GroupId");
                 });
         }
     }

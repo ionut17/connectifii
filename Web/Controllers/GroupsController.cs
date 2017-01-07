@@ -3,9 +3,9 @@ using Infrastructure;
 
 namespace Web.Controllers
 {
-    public class GroupController : AbstractController<Group>
+    public class GroupsController : AbstractController<Group>
     {
-        public GroupController()
+        public GroupsController()
         {
             Repository = new GroupRepository();
         }

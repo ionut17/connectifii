@@ -12,6 +12,5 @@ namespace Core
         [Required]
         public int Year { get; set; }
 
-        public ICollection<TeacherCourse> TeacherCourse { get; set; }
     }
 }
