@@ -1,4 +1,4 @@
-﻿{
+{
   "version": "1.0.0-*",
   "testRunner": "mstest",
   "dependencies": {
@@ -6,7 +6,8 @@
     "FluentAssertions": "4.18.0",
     "Infrastructure": "1.0.0-*",
     "MSTest.TestFramework": "1.0.7-preview",
-    "NETStandard.Library": "1.6.1"
+    "NETStandard.Library": "1.6.1",
+    "Web": "1.0.0-*"
   },
 
   "frameworks": {
