@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/teachers")]
     public class TeachersController : AbstractController<Teacher>
     {
         public TeachersController()
@@ -22,23 +22,20 @@ namespace Web.Controllers
 
             var teacher = new Teacher(teacherDto);
 
-            if (
-                Repository.GetAll()
-                    .Any(
-                        t =>
-                            t.LastName.Equals(teacher.LastName) && t.FirstName.Equals(teacher.FirstName) &&
-                            (t.BirthDate == teacher.BirthDate)))
+            if (Repository.GetAll().Any(t => t.LastName.Equals(teacher.LastName) &&
+                t.FirstName.Equals(teacher.FirstName) &&
+                (t.BirthDate == teacher.BirthDate)))
                 return BadRequest("Teacher already in DB.");
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             Repository.Create(teacher);
-            return CreatedAtRoute("GetResourceteachers", new {id = teacher.Id}, teacher);
+            return CreatedAtRoute("GetResourceteachers", new { id = teacher.Id }, teacher);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(Guid id, [FromBody] TeacherDto entity)
+        public IActionResult UpdateTeacher(Guid id, [FromBody] TeacherDto entity)
         {
             if (entity == null)
                 return BadRequest();
@@ -50,8 +47,13 @@ namespace Web.Controllers
                 FirstName = entity.FirstName,
                 BirthDate = entity.BirthDate
             };
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             Repository.Update(teacher);
-            return CreatedAtRoute("GetResourcecourses", new {id}, teacher);
+            return new NoContentResult();
         }
+
     }
 }

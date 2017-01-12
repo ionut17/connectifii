@@ -2,6 +2,7 @@
 using System.Linq;
 using Core;
 using Infrastructure;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers
@@ -27,6 +28,41 @@ namespace Web.Controllers
             if (result == null)
                 return NotFound("Id " + id + " does not exist");
             return Ok(result);
+        }
+
+        [HttpPatch("{id}")]
+        public IActionResult PatchEntity(Guid id, [FromBody] JsonPatchDocument<IEntity> entity)
+        {
+            if (entity == null)
+                return BadRequest();
+
+            var entityForUpdate = Repository.GetById(id);
+            if (entityForUpdate == null)
+                return NotFound("Id " + id + " does not exist");
+
+            entity.ApplyTo(entityForUpdate, ModelState);
+ 
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                Repository.Update(entityForUpdate);
+            }
+            catch (Exception)
+            {
+                return BadRequest("Invalid operation(s). Verify if operation(s) comply with the requirements.");
+            }
+            return Ok(entityForUpdate);
+        }
+
+        [HttpDelete("{id}")]
+        public void Delete(Guid id)
+        {
+            var entity = Repository.GetById(id);
+            Repository.Delete(entity);
         }
     }
 }

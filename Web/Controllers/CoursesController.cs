@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/courses")]
     public class CoursesController : AbstractController<Course>
     {
         public CoursesController()
@@ -31,7 +31,7 @@ namespace Web.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(Guid id, [FromBody] CourseDto entity)
+        public IActionResult UpdateCourse(Guid id, [FromBody] CourseDto entity)
         {
             if (entity == null)
                 return BadRequest();
@@ -42,8 +42,12 @@ namespace Web.Controllers
                 Title = entity.Title,
                 Year = entity.Year
             };
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             Repository.Update(newCourse);
-            return CreatedAtRoute("GetResourcecourses", new {id}, newCourse);
+            return new NoContentResult();
         }
     }
 }

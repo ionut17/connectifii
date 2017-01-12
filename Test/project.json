@@ -1,10 +1,11 @@
-﻿{
+{
   "version": "1.0.0-*",
   "testRunner": "mstest",
   "dependencies": {
     "dotnet-test-mstest": "1.1.2-preview",
     "FluentAssertions": "4.18.0",
     "Infrastructure": "1.0.0-*",
+    "Microsoft.AspNetCore.JsonPatch": "1.1.0",
     "MSTest.TestFramework": "1.0.7-preview",
     "NETStandard.Library": "1.6.1"
   },

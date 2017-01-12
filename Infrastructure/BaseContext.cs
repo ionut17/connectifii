@@ -27,6 +27,8 @@ namespace Infrastructure
                 group.Year,
                 group.Name
             });
+
+            modelBuilder.Entity<Student>().HasAlternateKey(student => student.RegistrationNumber);
         }
     }
 }

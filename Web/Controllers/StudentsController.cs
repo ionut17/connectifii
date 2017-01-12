@@ -64,12 +64,15 @@ namespace Web.Controllers
 
             Repository.Create(newStudent);
 
-            return CreatedAtRoute("GetResourceStudents", new {id = newId}, entity);
+            return CreatedAtRoute("GetResourcestudents", new {id = newId}, entity);
         }
 
         [HttpPut("{id}")]
-        public void Put(Guid id, [FromBody] StudentDTO entity)
+        public IActionResult UpdateStudent(Guid id, [FromBody] StudentDTO entity)
         {
+            if (entity == null)
+                return BadRequest();
+
             var newStudent = new Student
             {
                 Id = id,
@@ -78,47 +81,12 @@ namespace Web.Controllers
                 BirthDate = entity.BirthDate,
                 RegistrationNumber = entity.RegistrationNumber
             };
-            Repository.Update(newStudent);
-        }
 
-        [HttpDelete("{id}")]
-        public void Delete(Guid id)
-        {
-            var currentStudent = Repository.GetById(id);
-            Repository.Delete(currentStudent);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            Repository.Update(newStudent);
+            return new NoContentResult();
         }
     }
 }
-
-/*
- [HttpPost]
-        public IActionResult Post([FromBody] StudentDTO entity)
-        {
-            if (entity == null)
-            {
-                return NotFound();
-            }
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            Guid newId = new Guid();
-            var newStudent = new Student
-            {
-                Id = newId,
-                FirstName = entity.FirstName,
-                LastName = entity.LastName,
-                BirthDate = DateTime.Now,
-                Courses = new List<Course>(),
-                Group = "4A5",
-                RegistrationNumber = "hfha813187",
-                Year = 2
-            };
-
-            Repository.Create(newStudent);
-
-            return CreatedAtRoute("GetResourceStudents", new { id = newId }, entity);
-        }
-     */

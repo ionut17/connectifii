@@ -72,6 +72,8 @@ namespace Infrastructure.Migrations
 
                 b.HasKey("Id");
 
+                b.HasAlternateKey("RegistrationNumber");
+
                 b.HasIndex("GroupId");
 
                 b.ToTable("Students");
