@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Infrastructure.Migrations
@@ -9,50 +8,50 @@ namespace Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Courses_Students_StudentId",
-                table: "Courses");
+                "FK_Courses_Students_StudentId",
+                "Courses");
 
             migrationBuilder.DropIndex(
-                name: "IX_Courses_StudentId",
-                table: "Courses");
+                "IX_Courses_StudentId",
+                "Courses");
 
             migrationBuilder.DropColumn(
-                name: "StudentId",
-                table: "Courses");
+                "StudentId",
+                "Courses");
 
             migrationBuilder.AddColumn<Guid>(
-                name: "CourseId",
-                table: "Teachers",
+                "CourseId",
+                "Teachers",
                 nullable: true);
 
             migrationBuilder.AddColumn<Guid>(
-                name: "CourseId",
-                table: "Students",
+                "CourseId",
+                "Students",
                 nullable: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Teachers_CourseId",
-                table: "Teachers",
-                column: "CourseId");
+                "IX_Teachers_CourseId",
+                "Teachers",
+                "CourseId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Students_CourseId",
-                table: "Students",
-                column: "CourseId");
+                "IX_Students_CourseId",
+                "Students",
+                "CourseId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Students_Courses_CourseId",
-                table: "Students",
-                column: "CourseId",
-                principalTable: "Courses",
+                "FK_Students_Courses_CourseId",
+                "Students",
+                "CourseId",
+                "Courses",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Teachers_Courses_CourseId",
-                table: "Teachers",
-                column: "CourseId",
-                principalTable: "Courses",
+                "FK_Teachers_Courses_CourseId",
+                "Teachers",
+                "CourseId",
+                "Courses",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Restrict);
         }
@@ -60,44 +59,44 @@ namespace Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Students_Courses_CourseId",
-                table: "Students");
+                "FK_Students_Courses_CourseId",
+                "Students");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_Teachers_Courses_CourseId",
-                table: "Teachers");
+                "FK_Teachers_Courses_CourseId",
+                "Teachers");
 
             migrationBuilder.DropIndex(
-                name: "IX_Teachers_CourseId",
-                table: "Teachers");
+                "IX_Teachers_CourseId",
+                "Teachers");
 
             migrationBuilder.DropIndex(
-                name: "IX_Students_CourseId",
-                table: "Students");
+                "IX_Students_CourseId",
+                "Students");
 
             migrationBuilder.DropColumn(
-                name: "CourseId",
-                table: "Teachers");
+                "CourseId",
+                "Teachers");
 
             migrationBuilder.DropColumn(
-                name: "CourseId",
-                table: "Students");
+                "CourseId",
+                "Students");
 
             migrationBuilder.AddColumn<Guid>(
-                name: "StudentId",
-                table: "Courses",
+                "StudentId",
+                "Courses",
                 nullable: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Courses_StudentId",
-                table: "Courses",
-                column: "StudentId");
+                "IX_Courses_StudentId",
+                "Courses",
+                "StudentId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Courses_Students_StudentId",
-                table: "Courses",
-                column: "StudentId",
-                principalTable: "Students",
+                "FK_Courses_Students_StudentId",
+                "Courses",
+                "StudentId",
+                "Students",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Restrict);
         }

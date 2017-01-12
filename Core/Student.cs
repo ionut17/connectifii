@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Core
@@ -9,6 +8,7 @@ namespace Core
         public Student()
         {
         }
+
         public Student(string registrationNumber, string firstName, string lastName, int year, Group group,
             DateTime birthDate)
         {
@@ -40,7 +40,7 @@ namespace Core
         [Required]
         [MaxLength(1)]
         public int Year { get; set; }
-        
+
         public Group Group { get; set; }
 
         public virtual Course Course { get; set; } = new Course();

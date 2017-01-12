@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Infrastructure.Migrations
@@ -9,34 +8,28 @@ namespace Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Groups",
-                columns: table => new
+                "Groups",
+                table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(maxLength: 2, nullable: false)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Groups", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_Groups", x => x.Id); });
 
             migrationBuilder.CreateTable(
-                name: "Teachers",
-                columns: table => new
+                "Teachers",
+                table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
                     BirthDate = table.Column<DateTime>(nullable: false),
                     FirstName = table.Column<string>(maxLength: 20, nullable: false),
                     LastName = table.Column<string>(maxLength: 20, nullable: false)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Teachers", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_Teachers", x => x.Id); });
 
             migrationBuilder.CreateTable(
-                name: "Students",
-                columns: table => new
+                "Students",
+                table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
                     BirthDate = table.Column<DateTime>(nullable: false),
@@ -50,16 +43,16 @@ namespace Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_Students", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Students_Groups_GroupId",
-                        column: x => x.GroupId,
-                        principalTable: "Groups",
-                        principalColumn: "Id",
+                        "FK_Students_Groups_GroupId",
+                        x => x.GroupId,
+                        "Groups",
+                        "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Courses",
-                columns: table => new
+                "Courses",
+                table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
                     StudentId = table.Column<Guid>(nullable: true),
@@ -70,37 +63,37 @@ namespace Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_Courses", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Courses_Students_StudentId",
-                        column: x => x.StudentId,
-                        principalTable: "Students",
-                        principalColumn: "Id",
+                        "FK_Courses_Students_StudentId",
+                        x => x.StudentId,
+                        "Students",
+                        "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Courses_StudentId",
-                table: "Courses",
-                column: "StudentId");
+                "IX_Courses_StudentId",
+                "Courses",
+                "StudentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Students_GroupId",
-                table: "Students",
-                column: "GroupId");
+                "IX_Students_GroupId",
+                "Students",
+                "GroupId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Courses");
+                "Courses");
 
             migrationBuilder.DropTable(
-                name: "Teachers");
+                "Teachers");
 
             migrationBuilder.DropTable(
-                name: "Students");
+                "Students");
 
             migrationBuilder.DropTable(
-                name: "Groups");
+                "Groups");
         }
     }
 }

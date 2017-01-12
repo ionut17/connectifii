@@ -9,14 +9,14 @@ namespace Web.DummyData
     {
         public static void AddToDatabase()
         {
-            var courseRepository = new CourseRepository();
-            courseRepository.DeleteAll();
-
             var studentRepository = new StudentRepository();
             studentRepository.DeleteAll();
 
             var teacherRepository = new TeacherRepository();
             teacherRepository.DeleteAll();
+
+            var courseRepository = new CourseRepository();
+            courseRepository.DeleteAll();
 
             var groupRepository = new GroupRepository();
             groupRepository.DeleteAll();
@@ -37,7 +37,7 @@ namespace Web.DummyData
             courseRepository.Create(new Course("Introduction to .NET", 3, new List<Student> {ionut, anca},
                 new List<Teacher> {florin}));
             courseRepository.Create(new Course("Proiectarea Algoritmilor", 1, new List<Student> { eve, alexandra }, new List<Teacher> { dorel }));
-            courseRepository.Create(new Course("Baze de Date", 2, new List<Student> { stefan}, new List<Teacher> { cosmin}));
+            courseRepository.Create(new Course("Baze de Date", 2, new List<Student> { stefan, ionut, eve}, new List<Teacher> { cosmin}));
             
         }
 

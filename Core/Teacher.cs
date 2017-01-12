@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Core
 {
@@ -8,6 +7,7 @@ namespace Core
         public Teacher()
         {
         }
+
         public Teacher(string firstName, string lastName, DateTime birthDate)
         {
             Id = Guid.NewGuid();
@@ -15,7 +15,7 @@ namespace Core
             LastName = lastName;
             BirthDate = birthDate;
         }
-        
+
         public Teacher(string firstName, string lastName, DateTime birthDate, Course course)
         {
             Id = Guid.NewGuid();

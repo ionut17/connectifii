@@ -16,6 +16,7 @@ namespace Core
             Title = title;
             Year = year;
         }
+
         public Course(string title, int year, List<Student> students, List<Teacher> teachers)
         {
             Id = Guid.NewGuid();
@@ -40,12 +41,12 @@ namespace Core
         [MaxLength(1)]
         public int Year { get; set; }
 
+        public virtual ICollection<Student> Students { get; set; } = new List<Student>();
+
+        public virtual ICollection<Teacher> Teachers { get; set; } = new List<Teacher>();
+
         [Key]
         [Required]
         public Guid Id { get; set; }
-
-        public virtual ICollection<Student> Students { get; set; } = new List<Student>();
-        
-        public virtual ICollection<Teacher> Teachers { get; set; } = new List<Teacher>();
     }
 }
