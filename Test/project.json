@@ -7,7 +7,8 @@
     "Infrastructure": "1.0.0-*",
     "Microsoft.AspNetCore.JsonPatch": "1.1.0",
     "MSTest.TestFramework": "1.0.7-preview",
-    "NETStandard.Library": "1.6.1"
+    "NETStandard.Library": "1.6.1",
+    "Web": "1.0.0-*"
   },
 
   "frameworks": {
