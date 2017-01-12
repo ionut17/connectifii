@@ -54,6 +54,8 @@ namespace Infrastructure.Migrations
 
                     b.Property<DateTime>("BirthDate");
 
+                    b.Property<Guid?>("CourseId");
+
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasMaxLength(20);
@@ -72,6 +74,8 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CourseId");
+
                     b.HasIndex("GroupId");
 
                     b.ToTable("Students");
@@ -84,6 +88,8 @@ namespace Infrastructure.Migrations
 
                     b.Property<DateTime>("BirthDate");
 
+                    b.Property<Guid?>("CourseId");
+
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasMaxLength(20);
@@ -94,14 +100,27 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CourseId");
+
                     b.ToTable("Teachers");
                 });
 
             modelBuilder.Entity("Core.Student", b =>
                 {
+                    b.HasOne("Core.Course", "Course")
+                        .WithMany("Students")
+                        .HasForeignKey("CourseId");
+
                     b.HasOne("Core.Group", "Group")
                         .WithMany()
                         .HasForeignKey("GroupId");
+                });
+
+            modelBuilder.Entity("Core.Teacher", b =>
+                {
+                    b.HasOne("Core.Course", "Course")
+                        .WithMany("Teachers")
+                        .HasForeignKey("CourseId");
                 });
         }
     }

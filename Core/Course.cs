@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Core
 {
-    public sealed class Course : IEntity
+    public class Course : IEntity
     {
         public Course()
         {
@@ -15,6 +15,14 @@ namespace Core
             Id = Guid.NewGuid();
             Title = title;
             Year = year;
+        }
+        public Course(string title, int year, List<Student> students, List<Teacher> teachers)
+        {
+            Id = Guid.NewGuid();
+            Title = title;
+            Year = year;
+            Students = students;
+            Teachers = teachers;
         }
 
         public Course(CourseDto courseDto)
@@ -35,5 +43,9 @@ namespace Core
         [Key]
         [Required]
         public Guid Id { get; set; }
+
+        public virtual ICollection<Student> Students { get; set; } = new List<Student>();
+        
+        public virtual ICollection<Teacher> Teachers { get; set; } = new List<Teacher>();
     }
 }

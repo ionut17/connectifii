@@ -9,10 +9,7 @@ namespace Web.Controllers
         [HttpGet]
         public IActionResult ResetDataBase()
         {
-            Data.AddCourses();
-            Data.AddTeachers();
-            Data.AddGroups();
-            Data.AddStudents();
+            Data.AddToDatabase();
             return Ok("Succesfully reset data.");
         }
     }

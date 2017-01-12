@@ -8,8 +8,8 @@ using Infrastructure;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(BaseContext))]
-    [Migration("20170107130036_init2")]
-    partial class init2
+    [Migration("20170112094607_mig55")]
+    partial class mig55
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -55,6 +55,8 @@ namespace Infrastructure.Migrations
 
                     b.Property<DateTime>("BirthDate");
 
+                    b.Property<Guid?>("CourseId");
+
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasMaxLength(20);
@@ -73,6 +75,8 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CourseId");
+
                     b.HasIndex("GroupId");
 
                     b.ToTable("Students");
@@ -85,6 +89,8 @@ namespace Infrastructure.Migrations
 
                     b.Property<DateTime>("BirthDate");
 
+                    b.Property<Guid?>("CourseId");
+
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasMaxLength(20);
@@ -95,14 +101,27 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CourseId");
+
                     b.ToTable("Teachers");
                 });
 
             modelBuilder.Entity("Core.Student", b =>
                 {
+                    b.HasOne("Core.Course", "Course")
+                        .WithMany("Students")
+                        .HasForeignKey("CourseId");
+
                     b.HasOne("Core.Group", "Group")
                         .WithMany()
                         .HasForeignKey("GroupId");
+                });
+
+            modelBuilder.Entity("Core.Teacher", b =>
+                {
+                    b.HasOne("Core.Course", "Course")
+                        .WithMany("Teachers")
+                        .HasForeignKey("CourseId");
                 });
         }
     }

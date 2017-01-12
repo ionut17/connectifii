@@ -8,8 +8,8 @@ using Infrastructure;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(BaseContext))]
-    [Migration("20170107125846_init1")]
-    partial class init1
+    [Migration("20170111085547_mig88")]
+    partial class mig88
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -22,6 +22,8 @@ namespace Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<Guid?>("StudentId");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(30);
@@ -30,6 +32,8 @@ namespace Infrastructure.Migrations
                         .HasMaxLength(1);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("StudentId");
 
                     b.ToTable("Courses");
                 });
@@ -45,7 +49,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Group");
+                    b.ToTable("Groups");
                 });
 
             modelBuilder.Entity("Core.Student", b =>
@@ -96,6 +100,13 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Teachers");
+                });
+
+            modelBuilder.Entity("Core.Course", b =>
+                {
+                    b.HasOne("Core.Student", "Student")
+                        .WithMany("Courses")
+                        .HasForeignKey("StudentId");
                 });
 
             modelBuilder.Entity("Core.Student", b =>

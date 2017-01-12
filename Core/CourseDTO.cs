@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Core
 {
@@ -11,6 +10,5 @@ namespace Core
 
         [Required]
         public int Year { get; set; }
-
     }
 }

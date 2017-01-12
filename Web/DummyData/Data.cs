@@ -7,42 +7,39 @@ namespace Web.DummyData
 {
     public class Data
     {
-        public static void AddStudents()
-        {
-            var studentRepository = new StudentRepository();
-            studentRepository.DeleteAll();
-            var student = new Student("001", "Ionut", "Iacob", 3, new Group("A5"), DateTime.Now);
-            studentRepository.Create(new Student("002", "Anca", "Adascalitei", 3, new Group("A5"), DateTime.Now));
-            studentRepository.Create(new Student("003", "Stefan", "Gordin", 7, new Group("A5"), DateTime.Now));
-            studentRepository.Create(new Student("004", "Eveline", "Giosanu", 3, new Group("A5"), DateTime.Now));
-            studentRepository.Create(new Student("005", "Alexandra", "Gadioi", 3, new Group("A2"), DateTime.Now));
-        }
-
-        public static void AddCourses()
+        public static void AddToDatabase()
         {
             var courseRepository = new CourseRepository();
             courseRepository.DeleteAll();
-            courseRepository.Create(new Course("Introduction to .NET", 3));
-            courseRepository.Create(new Course("Proiectarea Algoritmilor", 1));
-            courseRepository.Create(new Course("Baze de Date", 2));
-        }
 
-        public static void AddTeachers()
-        {
+            var studentRepository = new StudentRepository();
+            studentRepository.DeleteAll();
+
             var teacherRepository = new TeacherRepository();
             teacherRepository.DeleteAll();
-            teacherRepository.Create(new Teacher("Florin", "Olariu", DateTime.Now));
-            teacherRepository.Create(new Teacher("Dorel", "Lucanu", DateTime.Now));
-            teacherRepository.Create(new Teacher("Cosmin", "Varlan", DateTime.Now));
-        }
 
-        public static void AddGroups()
-        {
             var groupRepository = new GroupRepository();
             groupRepository.DeleteAll();
-            groupRepository.Create(new Group("A5"));
-            groupRepository.Create(new Group("A1"));
-            groupRepository.Create(new Group("A4"));
+
+            var a5 = new Group("A5");
+            var a2 = new Group("A2");
+
+            var ionut = new Student("001", "Ionut", "Iacob", 3, a5, DateTime.Now);
+            var anca = new Student("002", "Anca", "Adascalitei", 3, a5, DateTime.Now);
+            var stefan = new Student("003", "Stefan", "Gordin", 7, a5, DateTime.Now);
+            var eve = new Student("004", "Eveline", "Giosanu", 3, a5, DateTime.Now);
+            var alexandra = new Student("005", "Alexandra", "Gadioi", 3, a2, DateTime.Now);
+
+            var florin = new Teacher("Florin", "Olariu", DateTime.Now);
+            var dorel = new Teacher("Dorel", "Lucanu", DateTime.Now);
+            var cosmin = new Teacher("Cosmin", "Varlan", DateTime.Now);
+
+            courseRepository.Create(new Course("Introduction to .NET", 3, new List<Student> {ionut, anca},
+                new List<Teacher> {florin}));
+            courseRepository.Create(new Course("Proiectarea Algoritmilor", 1, new List<Student> { eve, alexandra }, new List<Teacher> { dorel }));
+            courseRepository.Create(new Course("Baze de Date", 2, new List<Student> { stefan}, new List<Teacher> { cosmin}));
+            
         }
+
     }
 }
