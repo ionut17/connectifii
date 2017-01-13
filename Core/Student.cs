@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Core
@@ -21,19 +22,6 @@ namespace Core
             BirthDate = birthDate;
         }
 
-        public Student(string registrationNumber, string firstName, string lastName, int year, Group group,
-            DateTime birthDate, Course course)
-        {
-            Id = Guid.NewGuid();
-            RegistrationNumber = registrationNumber;
-            FirstName = firstName;
-            LastName = lastName;
-            Year = year;
-            Group = group;
-            BirthDate = birthDate;
-            Course = course;
-        }
-
         [Required]
         public string RegistrationNumber { get; set; }
 
@@ -43,6 +31,6 @@ namespace Core
 
         public Group Group { get; set; }
 
-        public virtual Course Course { get; set; } = new Course();
+        public virtual ICollection<StudentCourse> StudentCourses { get; set; } = new List<StudentCourse>();
     }
 }

@@ -27,7 +27,8 @@ namespace Web.Controllers
         [HttpGet("{registrationNumber}/courses")]
         public IActionResult GetCourses(string registrationNumber)
         {
-            var result = StudentRepository.GetByRegistrationNumber(registrationNumber);
+            var result = StudentRepository.GetStudentCourses(registrationNumber);
+         
             if (result == null)
                 return NotFound("Registration number " + registrationNumber + " does not exist");
             return Ok(result);

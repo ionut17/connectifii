@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Core
 {
@@ -16,15 +17,6 @@ namespace Core
             BirthDate = birthDate;
         }
 
-        public Teacher(string firstName, string lastName, DateTime birthDate, Course course)
-        {
-            Id = Guid.NewGuid();
-            FirstName = firstName;
-            LastName = lastName;
-            BirthDate = birthDate;
-            Course = course;
-        }
-
         public Teacher(TeacherDto teacherDto)
         {
             Id = Guid.NewGuid();
@@ -33,6 +25,6 @@ namespace Core
             BirthDate = teacherDto.BirthDate;
         }
 
-        public virtual Course Course { get; set; } = new Course();
+        public virtual ICollection<TeacherCourse> StudentCourses { get; set; } = new List<TeacherCourse>();
     }
 }
