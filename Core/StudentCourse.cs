@@ -16,6 +16,7 @@ namespace Core
 
             StudentId = student.Id;
             CourseId = course.Id;
+            StudentRegistrationNumber = student.RegistrationNumber;
         }
 
         public virtual Student Student { get; set; }
@@ -23,5 +24,6 @@ namespace Core
 
         public Nullable<Guid> StudentId { get; set; }
         public Nullable<Guid> CourseId { get; set; }
+        public string StudentRegistrationNumber { get; set; }
     }
 }

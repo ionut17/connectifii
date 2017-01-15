@@ -8,9 +8,10 @@ using Infrastructure;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(BaseContext))]
-    partial class BaseContextModelSnapshot : ModelSnapshot
+    [Migration("20170115090627_many2many")]
+    partial class many2many
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-preview1-22509")
@@ -82,8 +83,6 @@ namespace Infrastructure.Migrations
                     b.Property<Guid?>("CourseId");
 
                     b.Property<Guid?>("StudentId");
-
-                    b.Property<string>("StudentRegistrationNumber");
 
                     b.HasKey("CourseId", "StudentId");
 
