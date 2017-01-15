@@ -29,6 +29,7 @@ namespace Infrastructure
             });
 
             modelBuilder.Entity<Student>().HasAlternateKey(student => student.RegistrationNumber);
+            modelBuilder.Entity<Student>().Property(p => p.FirstName).HasMaxLength(20);
         }
     }
 }

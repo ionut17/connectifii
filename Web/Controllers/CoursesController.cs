@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using AutoMapper;
 using Core;
 using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
@@ -9,25 +10,31 @@ namespace Web.Controllers
     [Route("api/courses")]
     public class CoursesController : AbstractController<Course>
     {
-        public CoursesController()
+        private readonly IMapper Mapper;
+
+        public CoursesController(IMapper mapper)
         {
             Repository = new CourseRepository();
+            Mapper = mapper;
         }
 
         [HttpPost]
-        public IActionResult CreateCourse([FromBody] CourseDto courseDto)
+        public IActionResult CreateCourse([FromBody] CourseDto entity)
         {
-            if (courseDto == null)
+            if (entity == null)
                 return BadRequest();
 
-            var course = new Course(courseDto);
+            var newCourse = Mapper.Map<CourseDto, Course>(entity);
+            newCourse.Id = new Guid();
 
-            if (Repository.GetAll().Any(c => c.Title.Equals(course.Title) && (c.Year == course.Year)))
+            if (Repository.GetAll().Any(c => c.Title.Equals(newCourse.Title) && (c.Year == newCourse.Year)))
                 return BadRequest("Course already in DB.");
+
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-            Repository.Create(course);
-            return CreatedAtRoute("GetResourcecourses", new {id = course.Id}, course);
+
+            Repository.Create(newCourse);
+            return CreatedAtRoute("GetResourcecourses", new {id = newCourse.Id}, newCourse);
         }
 
         [HttpPut("{id}")]
@@ -36,12 +43,9 @@ namespace Web.Controllers
             if (entity == null)
                 return BadRequest();
 
-            var newCourse = new Course
-            {
-                Id = id,
-                Title = entity.Title,
-                Year = entity.Year
-            };
+            var newCourse = Mapper.Map<CourseDto, Course>(entity);
+            newCourse.Id = id;
+
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);

@@ -46,23 +46,18 @@ namespace Web.Controllers
             {
                 return BadRequest(ModelState);
             }
-
-            try
-            {
-                Repository.Update(entityForUpdate);
-            }
-            catch (Exception)
-            {
-                return BadRequest("Invalid operation(s). Verify if operation(s) comply with the requirements.");
-            }
+            Repository.Update(entityForUpdate);
             return Ok(entityForUpdate);
         }
 
         [HttpDelete("{id}")]
-        public void Delete(Guid id)
+        public IActionResult Delete(Guid id)
         {
             var entity = Repository.GetById(id);
+            if (entity == null)
+                return BadRequest("Id " + id + " doesn't exist");
             Repository.Delete(entity);
+            return NoContent();
         }
     }
 }

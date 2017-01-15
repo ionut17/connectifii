@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading.Tasks;
+using AutoMapper;
 using Core;
 using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
@@ -8,11 +10,13 @@ namespace Web.Controllers
     [Route("api/students")]
     public class StudentsController : AbstractController<Student>
     {
+        private readonly IMapper Mapper;
         public StudentRepository StudentRepository = new StudentRepository();
 
-        public StudentsController()
+        public StudentsController(IMapper mapper)
         {
-            Repository = StudentRepository;
+            Repository = new StudentRepository();
+            Mapper = mapper;
         }
 
         [HttpGet("registrationnumber/{registrationNumber}")]
@@ -43,7 +47,7 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] StudentDTO entity)
+        public IActionResult Create([FromBody] StudentDto entity)
         {
             if (entity == null)
                 return NotFound();
@@ -52,40 +56,28 @@ namespace Web.Controllers
                 return BadRequest(ModelState);
 
             //TODO solve conflict at inserting group (not allowing null)
-            var newId = new Guid();
-            var newStudent = new Student
-            {
-                Id = newId,
-                FirstName = entity.FirstName,
-                LastName = entity.LastName,
-                BirthDate = entity.BirthDate,
-                RegistrationNumber = entity.RegistrationNumber
-            };
 
-            Repository.Create(newStudent);
+            var newStudent = Mapper.Map<StudentDto, Student>(entity);
+            newStudent.Id = new Guid();
 
-            return CreatedAtRoute("GetResourcestudents", new {id = newId}, entity);
+            StudentRepository.Create(newStudent);
+
+            return CreatedAtRoute("GetResourcestudents", new {id = newStudent.Id}, entity);
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateStudent(Guid id, [FromBody] StudentDTO entity)
+        public IActionResult UpdateStudent(Guid id, [FromBody] StudentDto entity)
         {
             if (entity == null)
                 return BadRequest();
 
-            var newStudent = new Student
-            {
-                Id = id,
-                FirstName = entity.FirstName,
-                LastName = entity.LastName,
-                BirthDate = entity.BirthDate,
-                RegistrationNumber = entity.RegistrationNumber
-            };
+            var newStudent = Mapper.Map<StudentDto, Student>(entity);
+            newStudent.Id = id;
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            Repository.Update(newStudent);
+            StudentRepository.Update(newStudent);
             return new NoContentResult();
         }
     }

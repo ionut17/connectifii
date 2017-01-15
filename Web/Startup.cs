@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Web.MappingProfiles;
 
 namespace Web
 {
@@ -31,6 +33,13 @@ namespace Web
             services.AddApplicationInsightsTelemetry(Configuration);
 
             services.AddMvc();
+
+            services.AddAutoMapper();
+
+            var config = new MapperConfiguration(cfg => {
+                cfg.AddProfile(new MappingProfile());
+            });
+            services.AddSingleton(sp => config.CreateMapper());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline

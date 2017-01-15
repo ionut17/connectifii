@@ -2,11 +2,13 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
+using Infrastructure;
 
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(BaseContext))]
-    internal class BaseContextModelSnapshot : ModelSnapshot
+    partial class BaseContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -15,96 +17,96 @@ namespace Infrastructure.Migrations
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Core.Course", b =>
-            {
-                b.Property<Guid>("Id")
-                    .ValueGeneratedOnAdd();
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
 
-                b.Property<string>("Title")
-                    .IsRequired()
-                    .HasMaxLength(30);
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(30);
 
-                b.Property<int>("Year")
-                    .HasMaxLength(1);
+                    b.Property<int>("Year")
+                        .HasMaxLength(1);
 
-                b.HasKey("Id");
+                    b.HasKey("Id");
 
-                b.ToTable("Courses");
-            });
+                    b.ToTable("Courses");
+                });
 
             modelBuilder.Entity("Core.Group", b =>
-            {
-                b.Property<Guid>("Id")
-                    .ValueGeneratedOnAdd();
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
 
-                b.Property<string>("Name")
-                    .IsRequired()
-                    .HasMaxLength(2);
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(2);
 
-                b.Property<int>("Year")
-                    .HasMaxLength(1);
+                    b.Property<int>("Year")
+                        .HasMaxLength(1);
 
-                b.HasKey("Id");
+                    b.HasKey("Id");
 
-                b.HasAlternateKey("Year", "Name");
+                    b.HasAlternateKey("Year", "Name");
 
-                b.ToTable("Groups");
-            });
+                    b.ToTable("Groups");
+                });
 
             modelBuilder.Entity("Core.Student", b =>
-            {
-                b.Property<Guid>("Id")
-                    .ValueGeneratedOnAdd();
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
 
-                b.Property<DateTime>("BirthDate");
+                    b.Property<DateTime>("BirthDate");
 
-                b.Property<string>("FirstName")
-                    .IsRequired()
-                    .HasMaxLength(20);
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(20);
 
-                b.Property<Guid?>("GroupId");
+                    b.Property<Guid?>("GroupId");
 
-                b.Property<string>("LastName")
-                    .IsRequired()
-                    .HasMaxLength(20);
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(20);
 
-                b.Property<string>("RegistrationNumber")
-                    .IsRequired();
+                    b.Property<string>("RegistrationNumber")
+                        .IsRequired();
 
-                b.HasKey("Id");
+                    b.HasKey("Id");
 
-                b.HasAlternateKey("RegistrationNumber");
+                    b.HasAlternateKey("RegistrationNumber");
 
-                b.HasIndex("GroupId");
+                    b.HasIndex("GroupId");
 
-                b.ToTable("Students");
-            });
+                    b.ToTable("Students");
+                });
 
             modelBuilder.Entity("Core.Teacher", b =>
-            {
-                b.Property<Guid>("Id")
-                    .ValueGeneratedOnAdd();
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
 
-                b.Property<DateTime>("BirthDate");
+                    b.Property<DateTime>("BirthDate");
 
-                b.Property<string>("FirstName")
-                    .IsRequired()
-                    .HasMaxLength(20);
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(20);
 
-                b.Property<string>("LastName")
-                    .IsRequired()
-                    .HasMaxLength(20);
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(20);
 
-                b.HasKey("Id");
+                    b.HasKey("Id");
 
-                b.ToTable("Teachers");
-            });
+                    b.ToTable("Teachers");
+                });
 
             modelBuilder.Entity("Core.Student", b =>
-            {
-                b.HasOne("Core.Group", "Group")
-                    .WithMany()
-                    .HasForeignKey("GroupId");
-            });
+                {
+                    b.HasOne("Core.Group", "Group")
+                        .WithMany()
+                        .HasForeignKey("GroupId");
+                });
         }
     }
 }

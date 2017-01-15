@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Core
 {
-    public class StudentDTO
+    public class StudentDto
     {
         [Required]
         public string RegistrationNumber { get; set; }
