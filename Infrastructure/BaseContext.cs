@@ -1,9 +1,10 @@
 ﻿using Core;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure
 {
-    public class BaseContext : DbContext
+    public class BaseContext : IdentityDbContext<AppUser, AppRole, string>
     {
         public DbSet<Student> Students { get; set; }
 
