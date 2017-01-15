@@ -9,7 +9,6 @@ namespace Core
         public string Name { get; set; }
 
         [Required]
-        [MaxLength(1)]
         [Range(0, 9)]
         public int Year { get; set; }
     }
