@@ -1,20 +1,20 @@
 ﻿using System;
+using System.Linq;
 using AutoMapper;
 using Core;
 using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
 
 namespace Web.Controllers
 {
     public class GroupsController : AbstractController<Group>
     {
-        private readonly IMapper Mapper;
+        private readonly IMapper _mapper;
 
         public GroupsController(IMapper mapper)
         {
             Repository = new GroupRepository();
-            Mapper = mapper;
+            _mapper = mapper;
         }
 
         [HttpPost]
@@ -23,18 +23,18 @@ namespace Web.Controllers
             if (entity == null)
                 return BadRequest();
 
-            var newGroup = Mapper.Map<GroupDto, Group>(entity);
+            var newGroup = _mapper.Map<GroupDto, Group>(entity);
             newGroup.Id = new Guid();
 
             if (Repository.GetAll().Any(g => g.Name.Equals(newGroup.Name) &&
-                g.Year == newGroup.Year))
+                                             (g.Year == newGroup.Year)))
                 return BadRequest("Group already in DB.");
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             Repository.Create(newGroup);
-            return CreatedAtRoute("GetResourcegroups", new { id = newGroup.Id }, newGroup);
+            return CreatedAtRoute("GetResourcegroups", new {id = newGroup.Id}, newGroup);
         }
 
         [HttpPut("{id}")]
@@ -43,7 +43,7 @@ namespace Web.Controllers
             if (entity == null)
                 return BadRequest();
 
-            var newGroup = Mapper.Map<GroupDto, Group>(entity);
+            var newGroup = _mapper.Map<GroupDto, Group>(entity);
             newGroup.Id = id;
 
             if (!ModelState.IsValid)
@@ -52,6 +52,5 @@ namespace Web.Controllers
             Repository.Update(newGroup);
             return new NoContentResult();
         }
-
     }
 }

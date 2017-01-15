@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Infrastructure.Migrations
 {
-    public partial class many2many : Migration
+    public partial class merged : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -22,9 +22,14 @@ namespace Infrastructure.Migrations
                 table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    Name = table.Column<string>(maxLength: 2, nullable: false)
+                    Name = table.Column<string>(maxLength: 2, nullable: false),
+                    Year = table.Column<int>(maxLength: 1, nullable: false)
                 },
-                constraints: table => { table.PrimaryKey("PK_Groups", x => x.Id); });
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Groups", x => x.Id);
+                    table.UniqueConstraint("AK_Groups_Year_Name", x => new {x.Year, x.Name});
+                });
 
             migrationBuilder.CreateTable(
                 "Teachers",
@@ -46,12 +51,12 @@ namespace Infrastructure.Migrations
                     FirstName = table.Column<string>(maxLength: 20, nullable: false),
                     GroupId = table.Column<Guid>(nullable: true),
                     LastName = table.Column<string>(maxLength: 20, nullable: false),
-                    RegistrationNumber = table.Column<string>(nullable: false),
-                    Year = table.Column<int>(maxLength: 1, nullable: false)
+                    RegistrationNumber = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Students", x => x.Id);
+                    table.UniqueConstraint("AK_Students_RegistrationNumber", x => x.RegistrationNumber);
                     table.ForeignKey(
                         "FK_Students_Groups_GroupId",
                         x => x.GroupId,
@@ -89,7 +94,8 @@ namespace Infrastructure.Migrations
                 table => new
                 {
                     CourseId = table.Column<Guid>(nullable: false),
-                    StudentId = table.Column<Guid>(nullable: false)
+                    StudentId = table.Column<Guid>(nullable: false),
+                    StudentRegistrationNumber = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

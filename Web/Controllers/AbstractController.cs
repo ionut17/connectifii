@@ -41,11 +41,9 @@ namespace Web.Controllers
                 return NotFound("Id " + id + " does not exist");
 
             entity.ApplyTo(entityForUpdate, ModelState);
- 
+
             if (!ModelState.IsValid)
-            {
                 return BadRequest(ModelState);
-            }
             Repository.Update(entityForUpdate);
             return Ok(entityForUpdate);
         }

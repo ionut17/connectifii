@@ -10,16 +10,17 @@ namespace Web.Controllers
     [Route("api/courses")]
     public class CoursesController : AbstractController<Course>
     {
+        private readonly IMapper _mapper;
         public CourseRepository CourseRepository = new CourseRepository();
-        public TeacherRepository TeacherRepository = new TeacherRepository();
         public StudentRepository StudentRepository = new StudentRepository();
-        private readonly IMapper Mapper;
+        public TeacherRepository TeacherRepository = new TeacherRepository();
 
         public CoursesController(IMapper mapper)
 
         {
             Repository = CourseRepository;
-            Mapper = mapper;
+            _mapper = mapper;
+        }
 
         [HttpGet("{id}/students")]
         public IActionResult GetStudents(Guid id)
@@ -51,7 +52,7 @@ namespace Web.Controllers
             if (entity == null)
                 return BadRequest();
 
-            var newCourse = Mapper.Map<CourseDto, Course>(entity);
+            var newCourse = _mapper.Map<CourseDto, Course>(entity);
             newCourse.Id = new Guid();
 
             if (Repository.GetAll().Any(c => c.Title.Equals(newCourse.Title) && (c.Year == newCourse.Year)))
@@ -70,7 +71,7 @@ namespace Web.Controllers
             if (entity == null)
                 return BadRequest();
 
-            var newCourse = Mapper.Map<CourseDto, Course>(entity);
+            var newCourse = _mapper.Map<CourseDto, Course>(entity);
             newCourse.Id = id;
 
 

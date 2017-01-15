@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using AutoMapper;
 using Core;
 using Infrastructure;
@@ -10,14 +9,14 @@ namespace Web.Controllers
     [Route("api/students")]
     public class StudentsController : AbstractController<Student>
     {
+        private readonly IMapper _mapper;
         public CourseRepository CourseRepository = new CourseRepository();
-        private readonly IMapper Mapper;
         public StudentRepository StudentRepository = new StudentRepository();
 
         public StudentsController(IMapper mapper)
         {
             Repository = new StudentRepository();
-            Mapper = mapper;
+            _mapper = mapper;
         }
 
         [HttpGet("registrationnumber/{registrationNumber}")]
@@ -64,19 +63,20 @@ namespace Web.Controllers
 
             //TODO solve conflict at inserting group (not allowing null)
 
-            var newStudent = Mapper.Map<StudentDto, Student>(entity);
+            var newStudent = _mapper.Map<StudentDto, Student>(entity);
             newStudent.Id = new Guid();
 
             StudentRepository.Create(newStudent);
             return CreatedAtRoute("GetResourcestudents", new {id = newStudent.Id}, entity);
         }
+
         [HttpPut("{id}")]
         public IActionResult UpdateStudent(Guid id, [FromBody] StudentDto entity)
         {
             if (entity == null)
                 return BadRequest();
 
-            var newStudent = Mapper.Map<StudentDto, Student>(entity);
+            var newStudent = _mapper.Map<StudentDto, Student>(entity);
             newStudent.Id = id;
 
             if (!ModelState.IsValid)

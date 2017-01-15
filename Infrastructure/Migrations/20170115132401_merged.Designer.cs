@@ -8,8 +8,8 @@ using Infrastructure;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(BaseContext))]
-    [Migration("20170115092343_many2manyRegistration")]
-    partial class many2manyRegistration
+    [Migration("20170115132401_merged")]
+    partial class merged
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -43,7 +43,12 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasMaxLength(2);
 
+                    b.Property<int>("Year")
+                        .HasMaxLength(1);
+
                     b.HasKey("Id");
+
+                    b.HasAlternateKey("Year", "Name");
 
                     b.ToTable("Groups");
                 });
@@ -68,10 +73,9 @@ namespace Infrastructure.Migrations
                     b.Property<string>("RegistrationNumber")
                         .IsRequired();
 
-                    b.Property<int>("Year")
-                        .HasMaxLength(1);
-
                     b.HasKey("Id");
+
+                    b.HasAlternateKey("RegistrationNumber");
 
                     b.HasIndex("GroupId");
 

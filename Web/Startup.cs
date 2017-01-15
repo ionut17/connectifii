@@ -36,9 +36,7 @@ namespace Web
 
             services.AddAutoMapper();
 
-            var config = new MapperConfiguration(cfg => {
-                cfg.AddProfile(new MappingProfile());
-            });
+            var config = new MapperConfiguration(cfg => { cfg.AddProfile(new MappingProfile()); });
             services.AddSingleton(sp => config.CreateMapper());
         }
 

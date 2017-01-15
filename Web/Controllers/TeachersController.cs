@@ -10,16 +10,15 @@ namespace Web.Controllers
     [Route("api/teachers")]
     public class TeachersController : AbstractController<Teacher>
     {
-        public TeacherRepository TeacherRepository = new TeacherRepository();
+        private readonly IMapper _mapper;
         public CourseRepository CourseRepository = new CourseRepository();
-
-        private readonly IMapper Mapper;
+        public TeacherRepository TeacherRepository = new TeacherRepository();
 
         public TeachersController(IMapper mapper)
 
         {
             Repository = TeacherRepository;
-            Mapper = mapper;
+            _mapper = mapper;
         }
 
         [HttpGet("{id}/courses")]
@@ -40,19 +39,19 @@ namespace Web.Controllers
             if (entity == null)
                 return BadRequest();
 
-            var newTeacher = Mapper.Map<TeacherDto, Teacher>(entity);
+            var newTeacher = _mapper.Map<TeacherDto, Teacher>(entity);
             newTeacher.Id = new Guid();
 
             if (Repository.GetAll().Any(t => t.LastName.Equals(newTeacher.LastName) &&
-                t.FirstName.Equals(newTeacher.FirstName) &&
-                (t.BirthDate == newTeacher.BirthDate)))
+                                             t.FirstName.Equals(newTeacher.FirstName) &&
+                                             (t.BirthDate == newTeacher.BirthDate)))
                 return BadRequest("Teacher already in DB.");
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             Repository.Create(newTeacher);
-            return CreatedAtRoute("GetResourceteachers", new { id = newTeacher.Id }, newTeacher);
+            return CreatedAtRoute("GetResourceteachers", new {id = newTeacher.Id}, newTeacher);
         }
 
         [HttpPut("{id}")]
@@ -61,7 +60,7 @@ namespace Web.Controllers
             if (entity == null)
                 return BadRequest();
 
-            var newTeacher = Mapper.Map<TeacherDto, Teacher>(entity);
+            var newTeacher = _mapper.Map<TeacherDto, Teacher>(entity);
             newTeacher.Id = id;
 
             if (!ModelState.IsValid)
@@ -70,6 +69,5 @@ namespace Web.Controllers
             Repository.Update(newTeacher);
             return new NoContentResult();
         }
-
     }
 }

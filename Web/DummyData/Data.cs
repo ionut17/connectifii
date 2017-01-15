@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Core;
 using Infrastructure;
 
@@ -21,18 +22,18 @@ namespace Web.DummyData
             var groupRepository = new GroupRepository();
             groupRepository.DeleteAll();
 
-            var a5 = new Group("A5");
-            var a2 = new Group("A2");
+            var a5 = new Group("A5", 3);
+            var a2 = new Group("A2", 2);
 
-            var ionut = new Student("001", "Ionut", "Iacob", 3, a5, DateTime.Now);
-            var anca = new Student("002", "Anca", "Adascalitei", 3, a5, DateTime.Now);
-            var stefan = new Student("003", "Stefan", "Gordin", 7, a5, DateTime.Now);
-            var eve = new Student("004", "Eveline", "Giosanu", 3, a5, DateTime.Now);
-            var alexandra = new Student("005", "Alexandra", "Gadioi", 3, a2, DateTime.Now);
+            var ionut = new Student("001", "Ionut", "Iacob", a5, DateTime.Now);
+            var anca = new Student("002", "Anca", "Adascalitei", a5, DateTime.Now);
+            var stefan = new Student("003", "Stefan", "Gordin", a5, DateTime.Now);
+            var eve = new Student("004", "Eveline", "Giosanu", a5, DateTime.Now);
+            var alexandra = new Student("005", "Alexandra", "Gadioi", a2, DateTime.Now);
 
             var florin = new Teacher("Florin", "Olariu", DateTime.Now);
             var dorel = new Teacher("Dorel", "Lucanu", DateTime.Now);
-            var cosmin = new Teacher("Cosmin", "Varlan", DateTime.Now);     
+            var cosmin = new Teacher("Cosmin", "Varlan", DateTime.Now);
 
             studentRepository.Create(alexandra);
 

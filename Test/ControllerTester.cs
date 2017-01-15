@@ -1,18 +1,11 @@
-﻿using System;
-using Core;
-using FluentAssertions;
-using Infrastructure;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Web.Controllers;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Test
 {
     [TestClass]
     public class ControllerTester
     {
-
-        [TestMethod]
+        /*[TestMethod]
         public void When_GetControllerData_Then_ReturnOkResult()
         {
             var controller = CreateSut();
@@ -23,6 +16,6 @@ namespace Test
         private static StudentsController CreateSut()
         {
             return new StudentsController();
-        }
+        }*/
     }
 }
