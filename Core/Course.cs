@@ -15,21 +15,17 @@ namespace Core
             Id = Guid.NewGuid();
             Title = title;
             Year = year;
-
         }
-        public Course(string title, int year, ICollection<Student> students, ICollection<Teacher> teachers )
+
+        public Course(string title, int year, ICollection<Student> students, ICollection<Teacher> teachers)
         {
             Id = Guid.NewGuid();
             Title = title;
             Year = year;
             foreach (var student in students)
-            {
                 StudentCourses.Add(new StudentCourse(student, this));
-            }
             foreach (var teacher in teachers)
-            {
                 TeacherCourses.Add(new TeacherCourse(teacher, this));
-            }
         }
 
         public Course(CourseDto courseDto)
@@ -47,12 +43,12 @@ namespace Core
         [MaxLength(1)]
         public int Year { get; set; }
 
-        [Key]
-        [Required]
-        public Guid Id { get; set; }
-
         public virtual ICollection<StudentCourse> StudentCourses { get; set; } = new List<StudentCourse>();
 
         public virtual ICollection<TeacherCourse> TeacherCourses { get; set; } = new List<TeacherCourse>();
+
+        [Key]
+        [Required]
+        public Guid Id { get; set; }
     }
 }

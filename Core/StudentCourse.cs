@@ -6,7 +6,6 @@ namespace Core
     {
         public StudentCourse()
         {
-            
         }
 
         public StudentCourse(Student student, Course course)
@@ -22,8 +21,8 @@ namespace Core
         public virtual Student Student { get; set; }
         public virtual Course Course { get; set; }
 
-        public Nullable<Guid> StudentId { get; set; }
-        public Nullable<Guid> CourseId { get; set; }
+        public Guid? StudentId { get; set; }
+        public Guid? CourseId { get; set; }
         public string StudentRegistrationNumber { get; set; }
     }
 }

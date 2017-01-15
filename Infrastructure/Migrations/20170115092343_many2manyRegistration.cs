@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Infrastructure.Migrations
 {
@@ -9,16 +7,16 @@ namespace Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
-                name: "StudentRegistrationNumber",
-                table: "StudentCourses",
+                "StudentRegistrationNumber",
+                "StudentCourses",
                 nullable: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "StudentRegistrationNumber",
-                table: "StudentCourses");
+                "StudentRegistrationNumber",
+                "StudentCourses");
         }
     }
 }

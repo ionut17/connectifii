@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Core;
 using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +9,7 @@ namespace Web.Controllers
     [Route("api/students")]
     public class StudentsController : AbstractController<Student>
     {
+        public CourseRepository CourseRepository = new CourseRepository();
         public StudentRepository StudentRepository = new StudentRepository();
 
         public StudentsController()
@@ -24,22 +26,27 @@ namespace Web.Controllers
             return Ok(result);
         }
 
-        [HttpGet("{registrationNumber}/courses")]
-        public IActionResult GetCourses(string registrationNumber)
+        [HttpGet("{id}/courses")]
+        public IActionResult GetCourses(Guid id)
         {
-            var result = StudentRepository.GetStudentCourses(registrationNumber);
-         
+            var coursesIds = StudentRepository.GetStudentCourses(id);
+            if (coursesIds == null)
+                return NotFound("Id " + id + "does not exists.");
+            var result = CourseRepository.GetByIds(coursesIds);
             if (result == null)
-                return NotFound("Registration number " + registrationNumber + " does not exist");
+                return NotFound("This student is not enrolled to any courses.");
             return Ok(result);
         }
 
-        [HttpGet("{registrationNumber}/courses/{courseId}")]
-        public IActionResult GetCourse(string registrationNumber, Guid courseId)
+        [HttpGet("registrationnumber/{registrationNumber}/courses")]
+        public IActionResult GetCourses(string registrationNumber)
         {
-            var result = StudentRepository.GetByRegistrationNumber(registrationNumber);
+            var coursesIds = StudentRepository.GetStudentCourses(registrationNumber);
+            if (coursesIds == null)
+                return NotFound("Registration number " + registrationNumber + "does not exists.");
+            var result = CourseRepository.GetByIds(coursesIds);
             if (result == null)
-                return NotFound("Registration number " + registrationNumber + " does not exist");
+                return NotFound("This student is not enrolled to any courses.");
             return Ok(result);
         }
 
