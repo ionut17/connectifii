@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Core
 {
-    public class StudentDTO
+    public class StudentDto
     {
         [Required]
         public string RegistrationNumber { get; set; }
@@ -18,9 +18,5 @@ namespace Core
 
         [Required]
         public DateTime BirthDate { get; set; }
-
-        [Required]
-        [Range(0, 9)]
-        public int Year { get; set; }
     }
 }

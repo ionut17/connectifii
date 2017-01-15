@@ -1,5 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Threading.Tasks;
+using AutoMapper;
 using Core;
 using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
@@ -10,11 +11,13 @@ namespace Web.Controllers
     public class StudentsController : AbstractController<Student>
     {
         public CourseRepository CourseRepository = new CourseRepository();
+        private readonly IMapper Mapper;
         public StudentRepository StudentRepository = new StudentRepository();
 
-        public StudentsController()
+        public StudentsController(IMapper mapper)
         {
-            Repository = StudentRepository;
+            Repository = new StudentRepository();
+            Mapper = mapper;
         }
 
         [HttpGet("registrationnumber/{registrationNumber}")]
@@ -51,7 +54,7 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] StudentDTO entity)
+        public IActionResult Create([FromBody] StudentDto entity)
         {
             if (entity == null)
                 return NotFound();
@@ -60,53 +63,27 @@ namespace Web.Controllers
                 return BadRequest(ModelState);
 
             //TODO solve conflict at inserting group (not allowing null)
-            var newId = new Guid();
-            var newStudent = new Student
-            {
-                Id = newId,
-                FirstName = entity.FirstName,
-                LastName = entity.LastName,
-                BirthDate = entity.BirthDate,
-                RegistrationNumber = entity.RegistrationNumber,
-                Year = entity.Year
-            };
 
-            Repository.Create(newStudent);
+            var newStudent = Mapper.Map<StudentDto, Student>(entity);
+            newStudent.Id = new Guid();
 
-            return CreatedAtRoute("GetResourceStudents", new {id = newId}, entity);
+            StudentRepository.Create(newStudent);
+            return CreatedAtRoute("GetResourcestudents", new {id = newStudent.Id}, entity);
+        }
+        [HttpPut("{id}")]
+        public IActionResult UpdateStudent(Guid id, [FromBody] StudentDto entity)
+        {
+            if (entity == null)
+                return BadRequest();
+
+            var newStudent = Mapper.Map<StudentDto, Student>(entity);
+            newStudent.Id = id;
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            StudentRepository.Update(newStudent);
+            return new NoContentResult();
         }
     }
 }
-
-/*
- [HttpPost]
-        public IActionResult Post([FromBody] StudentDTO entity)
-        {
-            if (entity == null)
-            {
-                return NotFound();
-            }
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            Guid newId = new Guid();
-            var newStudent = new Student
-            {
-                Id = newId,
-                FirstName = entity.FirstName,
-                LastName = entity.LastName,
-                BirthDate = DateTime.Now,
-                Courses = new List<Course>(),
-                Group = "4A5",
-                RegistrationNumber = "hfha813187",
-                Year = 2
-            };
-
-            Repository.Create(newStudent);
-
-            return CreatedAtRoute("GetResourceStudents", new { id = newId }, entity);
-        }
-     */

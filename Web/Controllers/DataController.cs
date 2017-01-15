@@ -10,6 +10,7 @@ namespace Web.Controllers
         public IActionResult ResetDataBase()
         {
             Data.AddToDatabase();
+
             return Ok("Succesfully reset data.");
         }
     }

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Core;
-using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure
 {

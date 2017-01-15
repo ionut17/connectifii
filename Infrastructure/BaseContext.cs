@@ -28,6 +28,14 @@ namespace Infrastructure
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<StudentCourse>().HasKey(t => new {t.CourseId, t.StudentId});
             modelBuilder.Entity<TeacherCourse>().HasKey(t => new {t.CourseId, t.TeacherId});
+            modelBuilder.Entity<Group>().HasAlternateKey(group => new
+            {
+                group.Year,
+                group.Name
+            });
+
+            modelBuilder.Entity<Student>().HasAlternateKey(student => student.RegistrationNumber);
+            modelBuilder.Entity<Student>().Property(p => p.FirstName).HasMaxLength(20);
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Core;
 using Infrastructure;
 
@@ -11,6 +10,7 @@ namespace Web.DummyData
         {
             var studentRepository = new StudentRepository();
             studentRepository.DeleteAll();
+
 
             var teacherRepository = new TeacherRepository();
             teacherRepository.DeleteAll();

@@ -30,6 +30,18 @@ namespace Infrastructure
             Context.SaveChanges();
         }
 
+        public void Update(T entity)
+        {
+            Context.Update(entity);
+            Context.SaveChanges();
+        }
+
+        public void Delete(T entity)
+        {
+            Context.Remove(entity);
+            Context.SaveChanges();
+        }
+
         public void DeleteAll()
         {
             var data = Context.Set<T>();

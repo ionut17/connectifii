@@ -1,22 +1,25 @@
 ﻿using System;
 using System.Linq;
+using AutoMapper;
 using Core;
 using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/courses")]
     public class CoursesController : AbstractController<Course>
     {
         public CourseRepository CourseRepository = new CourseRepository();
         public TeacherRepository TeacherRepository = new TeacherRepository();
         public StudentRepository StudentRepository = new StudentRepository();
+        private readonly IMapper Mapper;
 
-        public CoursesController()
+        public CoursesController(IMapper mapper)
+
         {
             Repository = CourseRepository;
-        }
+            Mapper = mapper;
 
         [HttpGet("{id}/students")]
         public IActionResult GetStudents(Guid id)
@@ -43,19 +46,39 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateCourse([FromBody] CourseDto courseDto)
+        public IActionResult CreateCourse([FromBody] CourseDto entity)
         {
-            if (courseDto == null)
+            if (entity == null)
                 return BadRequest();
 
-            var course = new Course(courseDto);
+            var newCourse = Mapper.Map<CourseDto, Course>(entity);
+            newCourse.Id = new Guid();
 
-            if (Repository.GetAll().Any(c => c.Title.Equals(course.Title) && (c.Year == course.Year)))
+            if (Repository.GetAll().Any(c => c.Title.Equals(newCourse.Title) && (c.Year == newCourse.Year)))
                 return BadRequest("Course already in DB.");
+
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-            Repository.Create(course);
-            return CreatedAtRoute("GetResourcecourses", new {id = course.Id}, course);
+
+            Repository.Create(newCourse);
+            return CreatedAtRoute("GetResourcecourses", new {id = newCourse.Id}, newCourse);
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult UpdateCourse(Guid id, [FromBody] CourseDto entity)
+        {
+            if (entity == null)
+                return BadRequest();
+
+            var newCourse = Mapper.Map<CourseDto, Course>(entity);
+            newCourse.Id = id;
+
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            Repository.Update(newCourse);
+            return new NoContentResult();
         }
     }
 }
