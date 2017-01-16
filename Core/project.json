@@ -3,12 +3,14 @@
 
   "dependencies": {
     "AutoMapper": "5.2.0",
+    "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.1.0",
     "Microsoft.AspNetCore.JsonPatch": "1.1.0",
     "Microsoft.EntityFrameworkCore": "1.1.0-preview1-final",
     "Microsoft.EntityFrameworkCore.Design": "1.1.0-preview1-final",
     "Microsoft.EntityFrameworkCore.SqlServer": "1.1.0-preview1-final",
     "Microsoft.EntityFrameworkCore.SqlServer.Design": "1.1.0-preview1-final",
-    "Microsoft.Extensions.Logging": "1.1.0.0"
+    "Microsoft.Extensions.Logging": "1.1.0.0",
+    "Microsoft.IdentityModel.Tokens": "5.0.0"
   },
 
   "frameworks": {

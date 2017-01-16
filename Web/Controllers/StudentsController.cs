@@ -2,6 +2,7 @@
 using AutoMapper;
 using Core;
 using Infrastructure;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers
@@ -19,6 +20,11 @@ namespace Web.Controllers
             _mapper = mapper;
         }
 
+        public StudentsController()
+        {
+        }
+
+        [Authorize]
         [HttpGet("registrationnumber/{registrationNumber}")]
         public IActionResult Get(string registrationNumber)
         {

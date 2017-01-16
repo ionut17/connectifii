@@ -7,6 +7,7 @@ namespace Web.DummyData
 {
     public class Data
     {
+
         public static void AddToDatabase()
         {
             var studentRepository = new StudentRepository();
@@ -44,5 +45,6 @@ namespace Web.DummyData
             courseRepository.Create(new Course("Baze de Date", 2, new List<Student> {stefan, ionut, eve},
                 new List<Teacher> {cosmin}));
         }
+
     }
 }
