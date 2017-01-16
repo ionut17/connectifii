@@ -79,6 +79,21 @@ namespace Infrastructure.Migrations
                 b.ToTable("Students");
             });
 
+            modelBuilder.Entity("Core.StudentCourse", b =>
+            {
+                b.Property<Guid?>("CourseId");
+
+                b.Property<Guid?>("StudentId");
+
+                b.Property<string>("StudentRegistrationNumber");
+
+                b.HasKey("CourseId", "StudentId");
+
+                b.HasIndex("StudentId");
+
+                b.ToTable("StudentCourses");
+            });
+
             modelBuilder.Entity("Core.Teacher", b =>
             {
                 b.Property<Guid>("Id")
@@ -99,11 +114,50 @@ namespace Infrastructure.Migrations
                 b.ToTable("Teachers");
             });
 
+            modelBuilder.Entity("Core.TeacherCourse", b =>
+            {
+                b.Property<Guid?>("CourseId");
+
+                b.Property<Guid?>("TeacherId");
+
+                b.HasKey("CourseId", "TeacherId");
+
+                b.HasIndex("TeacherId");
+
+                b.ToTable("TeacherCourses");
+            });
+
             modelBuilder.Entity("Core.Student", b =>
             {
                 b.HasOne("Core.Group", "Group")
                     .WithMany()
                     .HasForeignKey("GroupId");
+            });
+
+            modelBuilder.Entity("Core.StudentCourse", b =>
+            {
+                b.HasOne("Core.Course", "Course")
+                    .WithMany("StudentCourses")
+                    .HasForeignKey("CourseId")
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                b.HasOne("Core.Student", "Student")
+                    .WithMany("StudentCourses")
+                    .HasForeignKey("StudentId")
+                    .OnDelete(DeleteBehavior.Cascade);
+            });
+
+            modelBuilder.Entity("Core.TeacherCourse", b =>
+            {
+                b.HasOne("Core.Course", "Course")
+                    .WithMany("TeacherCourses")
+                    .HasForeignKey("CourseId")
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                b.HasOne("Core.Teacher", "Teacher")
+                    .WithMany("StudentCourses")
+                    .HasForeignKey("TeacherId")
+                    .OnDelete(DeleteBehavior.Cascade);
             });
         }
     }

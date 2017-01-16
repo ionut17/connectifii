@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Core
 {
-    public sealed class Student : Person
+    public class Student : Person
     {
         public Student()
         {
@@ -24,5 +24,7 @@ namespace Core
         public string RegistrationNumber { get; set; }
 
         public Group Group { get; set; }
+
+        public virtual ICollection<StudentCourse> StudentCourses { get; set; } = new List<StudentCourse>();
     }
 }

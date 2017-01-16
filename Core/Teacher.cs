@@ -2,13 +2,12 @@
 
 namespace Core
 {
-    public sealed class Teacher : Person
+    public class Teacher : Person
     {
         public Teacher()
         {
         }
 
-        //util deocamdata doar pentru Dummy Data => posibil sa fie sters
         public Teacher(string firstName, string lastName, DateTime birthDate)
         {
             Id = Guid.NewGuid();
@@ -24,5 +23,8 @@ namespace Core
             LastName = teacherDto.LastName;
             BirthDate = teacherDto.BirthDate;
         }
+
+       
+        public virtual ICollection<TeacherCourse> StudentCourses { get; set; } = new List<TeacherCourse>();
     }
 }
