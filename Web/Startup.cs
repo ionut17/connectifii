@@ -36,6 +36,9 @@ namespace Web
 
             services.AddAutoMapper();
 
+            // Inject an implementation of ISwaggerProvider with defaulted settings applied
+            services.AddSwaggerGen();
+
             var config = new MapperConfiguration(cfg => { cfg.AddProfile(new MappingProfile()); });
             services.AddSingleton(sp => config.CreateMapper());
         }
@@ -51,6 +54,12 @@ namespace Web
             app.UseApplicationInsightsExceptionTelemetry();
 
             //app.UseMvc();
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui assets (HTML, JS, CSS etc.)
+            app.UseSwaggerUi();
 
             app.UseMvc(routes =>
             {
