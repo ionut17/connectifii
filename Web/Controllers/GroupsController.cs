@@ -11,9 +11,9 @@ namespace Web.Controllers
     {
         private readonly IMapper _mapper;
 
-        public GroupsController(IMapper mapper)
+        public GroupsController(IMapper mapper, IGroupRepository<Group> groupRepository)
         {
-            Repository = new GroupRepository();
+            Repository = groupRepository;
             _mapper = mapper;
         }
 

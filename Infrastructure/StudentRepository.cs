@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure
 {
-    public class StudentRepository : AbstractRepository<Student>
+    public class StudentRepository : AbstractRepository<Student>, IStudentRepository<Student>
     {
         public ICollection<Student> GetByIds(ICollection<Guid?> ids)
         {

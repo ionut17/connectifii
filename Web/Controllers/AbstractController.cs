@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using Core;
-using Infrastructure;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,7 +9,7 @@ namespace Web.Controllers
     [Route("api/[controller]")]
     public abstract class AbstractController<T> : Controller where T : class, IEntity
     {
-        public AbstractRepository<T> Repository;
+        public IRepository<T> Repository;
 
         [HttpGet]
         public IActionResult Get()

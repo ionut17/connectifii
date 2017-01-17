@@ -11,12 +11,13 @@ namespace Web.Controllers
     public class TeachersController : AbstractController<Teacher>
     {
         private readonly IMapper _mapper;
-        public CourseRepository CourseRepository = new CourseRepository();
-        public TeacherRepository TeacherRepository = new TeacherRepository();
+        public ICourseRepository<Course> CourseRepository;
+        public ITeacherRepository<Teacher> TeacherRepository;
 
-        public TeachersController(IMapper mapper)
-
+        public TeachersController(IMapper mapper, ITeacherRepository<Teacher> teacherRepository, ICourseRepository<Course> courseRepository)
         {
+            TeacherRepository = teacherRepository;
+            CourseRepository = courseRepository;
             Repository = TeacherRepository;
             _mapper = mapper;
         }

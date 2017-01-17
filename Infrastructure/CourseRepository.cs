@@ -5,7 +5,7 @@ using Core;
 
 namespace Infrastructure
 {
-    public class CourseRepository : AbstractRepository<Course>
+    public class CourseRepository : AbstractRepository<Course>, ICourseRepository<Course>
     {
         public ICollection<Course> GetByIds(ICollection<Guid?> ids)
         {

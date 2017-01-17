@@ -5,8 +5,9 @@ using Core;
 
 namespace Infrastructure
 {
-    public class TeacherRepository : AbstractRepository<Teacher>
+    public class TeacherRepository : AbstractRepository<Teacher>, ITeacherRepository<Teacher>
     {
+
         public ICollection<Teacher> GetByIds(ICollection<Guid?> ids)
         {
             return Context.Teachers.Where(s => ids.Contains(s.Id)).ToList();
@@ -20,5 +21,6 @@ namespace Infrastructure
                     .ToList();
             return coursesIDs;
         }
+
     }
 }

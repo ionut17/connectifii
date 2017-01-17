@@ -11,13 +11,15 @@ namespace Web.Controllers
     public class CoursesController : AbstractController<Course>
     {
         private readonly IMapper _mapper;
-        public CourseRepository CourseRepository = new CourseRepository();
-        public StudentRepository StudentRepository = new StudentRepository();
-        public TeacherRepository TeacherRepository = new TeacherRepository();
+        public ICourseRepository<Course> CourseRepository;
+        public IStudentRepository<Student> StudentRepository;
+        public ITeacherRepository<Teacher> TeacherRepository;
 
-        public CoursesController(IMapper mapper)
-
+        public CoursesController(IMapper mapper, IStudentRepository<Student> studentRepository, ICourseRepository<Course> courseRepository, ITeacherRepository<Teacher> teacherRepository)
         {
+            CourseRepository = courseRepository;
+            StudentRepository = studentRepository;
+            TeacherRepository = teacherRepository;
             Repository = CourseRepository;
             _mapper = mapper;
         }
@@ -27,7 +29,7 @@ namespace Web.Controllers
         {
             var studentsIds = CourseRepository.GetCourseStudents(id);
             if (studentsIds == null)
-                return NotFound("Id " + id + "does not exists.");
+                return NotFound("Id " + id + "does not exist.");
             var result = StudentRepository.GetByIds(studentsIds);
             if (result == null)
                 return NotFound("This course has no students enrolled.");
@@ -39,7 +41,7 @@ namespace Web.Controllers
         {
             var teachersIds = CourseRepository.GetCourseTeachers(id);
             if (teachersIds == null)
-                return NotFound("Id " + id + "does not exists.");
+                return NotFound("Id " + id + "does not exist.");
             var result = TeacherRepository.GetByIds(teachersIds);
             if (result == null)
                 return NotFound("This course has no teachers.");

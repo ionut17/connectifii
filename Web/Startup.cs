@@ -66,6 +66,14 @@ namespace Web
 
             // Add DbSeeder
             services.AddSingleton<DbSeeder>();
+
+            services.AddDbContext<BaseContext>(
+                options => options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]));
+
+            services.AddTransient<IStudentRepository<Student>, StudentRepository>();
+            services.AddTransient<ICourseRepository<Course>, CourseRepository>();
+            services.AddTransient<ITeacherRepository<Teacher>, TeacherRepository>();
+            services.AddTransient<IGroupRepository<Group>, GroupRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline

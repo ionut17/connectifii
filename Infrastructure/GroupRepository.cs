@@ -2,7 +2,7 @@
 
 namespace Infrastructure
 {
-    public class GroupRepository : AbstractRepository<Group>
+    public class GroupRepository : AbstractRepository<Group>, IGroupRepository<Group>
     {
     }
 }
