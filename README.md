@@ -1,3 +1,5 @@
+![alt tag](http://i.imgur.com/uBP7t07.png)
+
 # ConnectiFII
 API-ul dezvoltat are ca scop facilitarea accesului la baza de date a Facultății de Informatică prin intermediul unui API REST. Pe baza unui sistem de autentificare se vor putea accesa diferite informații cu privire la studenți, profesori, cursuri, grupe și altele.
 
