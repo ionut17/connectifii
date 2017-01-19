@@ -1,8 +1,4 @@
-﻿using System;
-using Core;
-using FluentAssertions;
-using Infrastructure;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Web.Controllers;
 
@@ -11,7 +7,6 @@ namespace Test
     [TestClass]
     public class ControllerTester
     {
-
         [TestMethod]
         public void When_GetControllerData_Then_ReturnOkResult()
         {

@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,24 +14,25 @@ using Newtonsoft.Json;
 
 namespace Web.Classes
 {
-
     [Route("api/token")]
     public class JwtProvider
     {
-        private readonly RequestDelegate _next;
+        private static readonly string PrivateKey = "private_key_1234567890";
 
-        // JWT-related members
-        private TimeSpan _tokenExpiration;
+        public static readonly SymmetricSecurityKey SecurityKey =
+            new SymmetricSecurityKey(Encoding.ASCII.GetBytes(PrivateKey));
+
+        public static readonly string Issuer = "ConnectiFII";
+        public static string TokenEndPoint = "/api/token";
+        private readonly RequestDelegate _next;
         private readonly SigningCredentials _signingCredentials;
+        private readonly UserManager<AppUser> _userManager;
 
         // EF and Identity members, available through DI
         private BaseContext _dbContext;
-        private readonly UserManager<AppUser> _userManager;
 
-        private static readonly string PrivateKey = "private_key_1234567890";
-        public static readonly SymmetricSecurityKey SecurityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(PrivateKey));
-        public static readonly string Issuer = "ConnectiFII";
-        public static string TokenEndPoint = "/api/token";
+        // JWT-related members
+        private TimeSpan _tokenExpiration;
 
         public JwtProvider(
             RequestDelegate next,
@@ -63,12 +62,9 @@ namespace Web.Classes
                 // OK: generate token and send it via a json-formatted string
                 return CreateToken(httpContext);
             }
-            else
-            {
-                // Not OK: output a 400 - Bad request HTTP error.
-                httpContext.Response.StatusCode = 400;
-                return httpContext.Response.WriteAsync("Bad request.");
-            }
+            // Not OK: output a 400 - Bad request HTTP error.
+            httpContext.Response.StatusCode = 400;
+            return httpContext.Response.WriteAsync("Bad request.");
         }
 
         private async Task CreateToken(HttpContext httpContext)
@@ -82,20 +78,22 @@ namespace Web.Classes
                 // check if there's an user with the given username
                 var user = await _userManager.FindByNameAsync(username);
                 // fallback to support e-mail address instead of username
-                if (user == null && username.Contains("@")) user = await _userManager.FindByEmailAsync(username);
+                if ((user == null) && username.Contains("@")) user = await _userManager.FindByEmailAsync(username);
 
-                var success = user != null && await _userManager.CheckPasswordAsync(user, password);
+                var success = (user != null) && await _userManager.CheckPasswordAsync(user, password);
                 if (success)
                 {
-                    DateTime now = DateTime.UtcNow;
+                    var now = DateTime.UtcNow;
 
                     // add the registered claims for JWT (RFC7519).
                     // For more info, see https://tools.ietf.org/html/rfc7519#section-4.1
-                    var claims = new[] {
+                    var claims = new[]
+                    {
                         new Claim(JwtRegisteredClaimNames.Iss, Issuer),
                         new Claim(JwtRegisteredClaimNames.Sub, user.Id),
                         new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                        new Claim(JwtRegisteredClaimNames.Iat, new DateTimeOffset(now).ToUnixTimeSeconds().ToString(), ClaimValueTypes.Integer64)
+                        new Claim(JwtRegisteredClaimNames.Iat, new DateTimeOffset(now).ToUnixTimeSeconds().ToString(),
+                            ClaimValueTypes.Integer64)
                         // TODO: add additional claims here
                     };
 
@@ -111,7 +109,7 @@ namespace Web.Classes
                     var jwt = new
                     {
                         access_token = encodedToken,
-                        expiration = (int)_tokenExpiration.TotalSeconds
+                        expiration = (int) _tokenExpiration.TotalSeconds
                     };
 
                     // return token

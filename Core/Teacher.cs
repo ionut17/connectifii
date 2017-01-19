@@ -25,7 +25,7 @@ namespace Core
             BirthDate = teacherDto.BirthDate;
         }
 
-       
+
         public virtual ICollection<TeacherCourse> StudentCourses { get; set; } = new List<TeacherCourse>();
     }
 }

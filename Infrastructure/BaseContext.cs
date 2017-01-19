@@ -6,15 +6,25 @@ namespace Infrastructure
 {
     public class BaseContext : IdentityDbContext<AppUser>
     {
-
         public BaseContext()
         {
-            
         }
 
         public BaseContext(DbContextOptions options) : base(options)
         {
         }
+
+        public DbSet<Student> Students { get; set; }
+
+        public DbSet<Teacher> Teachers { get; set; }
+
+        public DbSet<Course> Courses { get; set; }
+
+        public DbSet<Group> Groups { get; set; }
+
+        public DbSet<StudentCourse> StudentCourses { get; set; }
+
+        public DbSet<TeacherCourse> TeacherCourses { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -38,17 +48,5 @@ namespace Infrastructure
             modelBuilder.Entity<Student>().HasAlternateKey(student => student.RegistrationNumber);
             modelBuilder.Entity<Student>().Property(p => p.FirstName).HasMaxLength(20);
         }
-
-        public DbSet<Student> Students { get; set; }
-
-        public DbSet<Teacher> Teachers { get; set; }
-
-        public DbSet<Course> Courses { get; set; }
-
-        public DbSet<Group> Groups { get; set; }
-
-        public DbSet<StudentCourse> StudentCourses { get; set; }
-
-        public DbSet<TeacherCourse> TeacherCourses { get; set; }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Reflection;
 using AutoMapper;
 using Core;
 using Infrastructure;
@@ -11,8 +10,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
-using Swashbuckle.Swagger.Model;
-using Swashbuckle.SwaggerGen.Generator;
 using Web.Classes;
 using Web.DummyData;
 using Web.MappingProfiles;
@@ -49,27 +46,26 @@ namespace Web
 
             // Inject an implementation of ISwaggerProvider with defaulted settings applied
             services.AddSwaggerGen();
-            services.ConfigureSwaggerGen(options =>
-            {
-                options.OperationFilter<AuthorizationHeaderParameterOperationFilter>();
-            });
+            services.ConfigureSwaggerGen(
+                options => { options.OperationFilter<AuthorizationHeaderParameterOperationFilter>(); });
 
             var mapperConfig = new MapperConfiguration(cfg => { cfg.AddProfile(new MappingProfile()); });
             services.AddSingleton(sp => mapperConfig.CreateMapper());
 
             // Add Identity Services & Stores
-            services.AddIdentity<AppUser, IdentityRole>(config => {
-                config.User.RequireUniqueEmail = true;
-                config.Password.RequireNonAlphanumeric = false;
-                config.Cookies.ApplicationCookie.AutomaticChallenge = false;
-            })
+            services.AddIdentity<AppUser, IdentityRole>(config =>
+                {
+                    config.User.RequireUniqueEmail = true;
+                    config.Password.RequireNonAlphanumeric = false;
+                    config.Cookies.ApplicationCookie.AutomaticChallenge = false;
+                })
                 .AddEntityFrameworkStores<BaseContext>()
                 .AddDefaultTokenProviders();
 
             // Add ApplicationDbContext.
             services.AddDbContext<BaseContext>(options =>
-                options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"])
-                );
+                        options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"])
+            );
 
             // Add DbSeeder
             services.AddSingleton<DbSeeder>();
@@ -84,7 +80,8 @@ namespace Web
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, DbSeeder dbSeeder)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory,
+            DbSeeder dbSeeder)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
@@ -110,7 +107,6 @@ namespace Web
                 AutomaticAuthenticate = true,
                 AutomaticChallenge = true,
                 RequireHttpsMetadata = false,
-                
                 TokenValidationParameters = new TokenValidationParameters
                 {
                     IssuerSigningKey = JwtProvider.SecurityKey,

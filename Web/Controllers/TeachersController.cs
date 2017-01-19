@@ -2,7 +2,6 @@
 using System.Linq;
 using AutoMapper;
 using Core;
-using Infrastructure;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,7 +14,8 @@ namespace Web.Controllers
         public ICourseRepository<Course> CourseRepository;
         public ITeacherRepository<Teacher> TeacherRepository;
 
-        public TeachersController(IMapper mapper, ITeacherRepository<Teacher> teacherRepository, ICourseRepository<Course> courseRepository)
+        public TeachersController(IMapper mapper, ITeacherRepository<Teacher> teacherRepository,
+            ICourseRepository<Course> courseRepository)
         {
             TeacherRepository = teacherRepository;
             CourseRepository = courseRepository;

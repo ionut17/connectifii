@@ -7,12 +7,12 @@ namespace Infrastructure
 {
     public abstract class AbstractRepository<T> : IRepository<T> where T : class, IEntity
     {
-        public BaseContext Context { get; set; }
-
         protected AbstractRepository()
         {
             Context = Activator.CreateInstance<BaseContext>();
         }
+
+        public BaseContext Context { get; set; }
 
         public IQueryable<T> GetAll()
         {

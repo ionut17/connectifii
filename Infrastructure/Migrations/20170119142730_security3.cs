@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Infrastructure.Migrations
 {
@@ -9,51 +7,51 @@ namespace Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_AspNetUserClaims_Users_UserId",
-                table: "AspNetUserClaims");
+                "FK_AspNetUserClaims_Users_UserId",
+                "AspNetUserClaims");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_AspNetUserLogins_Users_UserId",
-                table: "AspNetUserLogins");
+                "FK_AspNetUserLogins_Users_UserId",
+                "AspNetUserLogins");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_AspNetUserRoles_Users_UserId",
-                table: "AspNetUserRoles");
+                "FK_AspNetUserRoles_Users_UserId",
+                "AspNetUserRoles");
 
             migrationBuilder.DropPrimaryKey(
-                name: "PK_Users",
-                table: "Users");
+                "PK_Users",
+                "Users");
 
             migrationBuilder.RenameTable(
-                name: "Users",
+                "Users",
                 newName: "AspNetUsers");
 
             migrationBuilder.AddPrimaryKey(
-                name: "PK_AspNetUsers",
-                table: "AspNetUsers",
-                column: "Id");
+                "PK_AspNetUsers",
+                "AspNetUsers",
+                "Id");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_AspNetUserClaims_AspNetUsers_UserId",
-                table: "AspNetUserClaims",
-                column: "UserId",
-                principalTable: "AspNetUsers",
+                "FK_AspNetUserClaims_AspNetUsers_UserId",
+                "AspNetUserClaims",
+                "UserId",
+                "AspNetUsers",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_AspNetUserLogins_AspNetUsers_UserId",
-                table: "AspNetUserLogins",
-                column: "UserId",
-                principalTable: "AspNetUsers",
+                "FK_AspNetUserLogins_AspNetUsers_UserId",
+                "AspNetUserLogins",
+                "UserId",
+                "AspNetUsers",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_AspNetUserRoles_AspNetUsers_UserId",
-                table: "AspNetUserRoles",
-                column: "UserId",
-                principalTable: "AspNetUsers",
+                "FK_AspNetUserRoles_AspNetUsers_UserId",
+                "AspNetUserRoles",
+                "UserId",
+                "AspNetUsers",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
         }
@@ -61,51 +59,51 @@ namespace Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_AspNetUserClaims_AspNetUsers_UserId",
-                table: "AspNetUserClaims");
+                "FK_AspNetUserClaims_AspNetUsers_UserId",
+                "AspNetUserClaims");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_AspNetUserLogins_AspNetUsers_UserId",
-                table: "AspNetUserLogins");
+                "FK_AspNetUserLogins_AspNetUsers_UserId",
+                "AspNetUserLogins");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_AspNetUserRoles_AspNetUsers_UserId",
-                table: "AspNetUserRoles");
+                "FK_AspNetUserRoles_AspNetUsers_UserId",
+                "AspNetUserRoles");
 
             migrationBuilder.DropPrimaryKey(
-                name: "PK_AspNetUsers",
-                table: "AspNetUsers");
+                "PK_AspNetUsers",
+                "AspNetUsers");
 
             migrationBuilder.RenameTable(
-                name: "AspNetUsers",
+                "AspNetUsers",
                 newName: "Users");
 
             migrationBuilder.AddPrimaryKey(
-                name: "PK_Users",
-                table: "Users",
-                column: "Id");
+                "PK_Users",
+                "Users",
+                "Id");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_AspNetUserClaims_Users_UserId",
-                table: "AspNetUserClaims",
-                column: "UserId",
-                principalTable: "Users",
+                "FK_AspNetUserClaims_Users_UserId",
+                "AspNetUserClaims",
+                "UserId",
+                "Users",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_AspNetUserLogins_Users_UserId",
-                table: "AspNetUserLogins",
-                column: "UserId",
-                principalTable: "Users",
+                "FK_AspNetUserLogins_Users_UserId",
+                "AspNetUserLogins",
+                "UserId",
+                "Users",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_AspNetUserRoles_Users_UserId",
-                table: "AspNetUserRoles",
-                column: "UserId",
-                principalTable: "Users",
+                "FK_AspNetUserRoles_Users_UserId",
+                "AspNetUserRoles",
+                "UserId",
+                "Users",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
         }

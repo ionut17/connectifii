@@ -2,7 +2,6 @@
 using System.Linq;
 using AutoMapper;
 using Core;
-using Infrastructure;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
