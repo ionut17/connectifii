@@ -8,9 +8,10 @@ using Infrastructure;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(BaseContext))]
-    partial class BaseContextModelSnapshot : ModelSnapshot
+    [Migration("20170119142730_security3")]
+    partial class security3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-preview1-22509")

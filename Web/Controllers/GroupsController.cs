@@ -3,6 +3,7 @@ using System.Linq;
 using AutoMapper;
 using Core;
 using Infrastructure;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers
@@ -17,6 +18,7 @@ namespace Web.Controllers
             _mapper = mapper;
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult CreateGroup([FromBody] GroupDto entity)
         {
@@ -37,6 +39,7 @@ namespace Web.Controllers
             return CreatedAtRoute("GetResourcegroups", new {id = newGroup.Id}, newGroup);
         }
 
+        [Authorize]
         [HttpPut("{id}")]
         public IActionResult UpdateTeacher(Guid id, [FromBody] GroupDto entity)
         {

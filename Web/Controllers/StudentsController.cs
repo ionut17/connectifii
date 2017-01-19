@@ -22,7 +22,6 @@ namespace Web.Controllers
             _mapper = mapper;
         }
 
-        [Authorize]
         [HttpGet("registrationnumber/{registrationNumber}")]
         public IActionResult Get(string registrationNumber)
         {
@@ -56,6 +55,7 @@ namespace Web.Controllers
             return Ok(result);
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult Create([FromBody] StudentDto entity)
         {
@@ -74,6 +74,7 @@ namespace Web.Controllers
             return CreatedAtRoute("GetResourcestudents", new {id = newStudent.Id}, entity);
         }
 
+        [Authorize]
         [HttpPut("{id}")]
         public IActionResult UpdateStudent(Guid id, [FromBody] StudentDto entity)
         {

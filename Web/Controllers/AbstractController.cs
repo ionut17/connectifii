@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Core;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
@@ -29,6 +30,7 @@ namespace Web.Controllers
             return Ok(result);
         }
 
+        [Authorize]
         [HttpPatch("{id}")]
         public IActionResult PatchEntity(Guid id, [FromBody] JsonPatchDocument<IEntity> entity)
         {
@@ -47,6 +49,7 @@ namespace Web.Controllers
             return Ok(entityForUpdate);
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public IActionResult Delete(Guid id)
         {

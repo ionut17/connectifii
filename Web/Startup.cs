@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using AutoMapper;
 using Core;
 using Infrastructure;
@@ -10,6 +11,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using Swashbuckle.Swagger.Model;
+using Swashbuckle.SwaggerGen.Generator;
 using Web.Classes;
 using Web.DummyData;
 using Web.MappingProfiles;
@@ -46,6 +49,10 @@ namespace Web
 
             // Inject an implementation of ISwaggerProvider with defaulted settings applied
             services.AddSwaggerGen();
+            services.ConfigureSwaggerGen(options =>
+            {
+                options.OperationFilter<AuthorizationHeaderParameterOperationFilter>();
+            });
 
             var mapperConfig = new MapperConfiguration(cfg => { cfg.AddProfile(new MappingProfile()); });
             services.AddSingleton(sp => mapperConfig.CreateMapper());
@@ -94,13 +101,6 @@ namespace Web
             // Enable middleware to serve swagger-ui assets (HTML, JS, CSS etc.)
             app.UseSwaggerUi();
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    "default",
-                    "{controller=Data}/{action=Get}");
-            });
-
             // Add a custom Jwt Provider to generate Tokens
             app.UseJwtProvider();
 
@@ -110,6 +110,7 @@ namespace Web
                 AutomaticAuthenticate = true,
                 AutomaticChallenge = true,
                 RequireHttpsMetadata = false,
+                
                 TokenValidationParameters = new TokenValidationParameters
                 {
                     IssuerSigningKey = JwtProvider.SecurityKey,
@@ -120,6 +121,7 @@ namespace Web
                 }
             });
 
+
             // Seed the Database (if needed)
             try
             {
@@ -129,6 +131,8 @@ namespace Web
             {
                 throw new Exception(e.ToString());
             }
+
+            app.UseMvc();
         }
     }
 }

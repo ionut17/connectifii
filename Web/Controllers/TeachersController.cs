@@ -3,6 +3,7 @@ using System.Linq;
 using AutoMapper;
 using Core;
 using Infrastructure;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers
@@ -34,6 +35,7 @@ namespace Web.Controllers
             return Ok(result);
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult CreateTeacher([FromBody] TeacherDto entity)
         {
@@ -55,6 +57,7 @@ namespace Web.Controllers
             return CreatedAtRoute("GetResourceteachers", new {id = newTeacher.Id}, newTeacher);
         }
 
+        [Authorize]
         [HttpPut("{id}")]
         public IActionResult UpdateTeacher(Guid id, [FromBody] TeacherDto entity)
         {

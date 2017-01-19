@@ -10,11 +10,14 @@ using Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 
 namespace Web.Classes
 {
+
+    [Route("api/token")]
     public class JwtProvider
     {
         private readonly RequestDelegate _next;
@@ -30,7 +33,7 @@ namespace Web.Classes
         private static readonly string PrivateKey = "private_key_1234567890";
         public static readonly SymmetricSecurityKey SecurityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(PrivateKey));
         public static readonly string Issuer = "ConnectiFII";
-        public static string TokenEndPoint = "/api/connect/token";
+        public static string TokenEndPoint = "/api/token";
 
         public JwtProvider(
             RequestDelegate next,
@@ -48,6 +51,7 @@ namespace Web.Classes
             _userManager = userManager;
         }
 
+        [HttpPost]
         public Task Invoke(HttpContext httpContext)
         {
             // Check if the request path matches our LoginPath
