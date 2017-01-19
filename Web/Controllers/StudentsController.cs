@@ -15,7 +15,7 @@ namespace Web.Controllers
 
         public StudentsController(IMapper mapper)
         {
-            Repository = new StudentRepository();
+            Repository = StudentRepository;
             _mapper = mapper;
         }
 

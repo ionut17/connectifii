@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
 
 namespace Core
 {
@@ -43,8 +44,10 @@ namespace Core
         [MaxLength(1)]
         public int Year { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<StudentCourse> StudentCourses { get; set; } = new List<StudentCourse>();
 
+        [JsonIgnore]
         public virtual ICollection<TeacherCourse> TeacherCourses { get; set; } = new List<TeacherCourse>();
 
         [Key]

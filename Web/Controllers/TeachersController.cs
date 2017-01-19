@@ -15,7 +15,6 @@ namespace Web.Controllers
         public TeacherRepository TeacherRepository = new TeacherRepository();
 
         public TeachersController(IMapper mapper)
-
         {
             Repository = TeacherRepository;
             _mapper = mapper;
