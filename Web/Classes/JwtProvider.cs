@@ -58,10 +58,7 @@ namespace Web.Classes
 
             // Check if the current request is a valid POST with the appropriate content type (application/x-www-form-urlencoded)
             if (httpContext.Request.Method.Equals("POST") && httpContext.Request.HasFormContentType)
-            {
-                // OK: generate token and send it via a json-formatted string
                 return CreateToken(httpContext);
-            }
             // Not OK: output a 400 - Bad request HTTP error.
             httpContext.Response.StatusCode = 400;
             return httpContext.Response.WriteAsync("Bad request.");

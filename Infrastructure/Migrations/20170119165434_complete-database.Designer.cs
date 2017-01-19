@@ -8,8 +8,8 @@ using Infrastructure;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(BaseContext))]
-    [Migration("20170119142730_security3")]
-    partial class security3
+    [Migration("20170119165434_complete-database")]
+    partial class completedatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
