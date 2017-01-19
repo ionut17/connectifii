@@ -35,7 +35,6 @@ namespace Infrastructure
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            //modelBuilder.Entity<AppUser>().ToTable("Users");
 
             modelBuilder.Entity<StudentCourse>().HasKey(t => new {t.CourseId, t.StudentId});
             modelBuilder.Entity<TeacherCourse>().HasKey(t => new {t.CourseId, t.TeacherId});

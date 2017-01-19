@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Core
 {
@@ -25,7 +26,7 @@ namespace Core
             BirthDate = teacherDto.BirthDate;
         }
 
-
+        [JsonIgnore]
         public virtual ICollection<TeacherCourse> StudentCourses { get; set; } = new List<TeacherCourse>();
     }
 }

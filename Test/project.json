@@ -7,6 +7,7 @@
     "FluentAssertions": "4.18.0",
     "Infrastructure": "1.0.0-*",
     "Microsoft.AspNetCore.JsonPatch": "1.1.0",
+    "Moq": "4.6.38-alpha",
     "MSTest.TestFramework": "1.0.7-preview",
     "NETStandard.Library": "1.6.1",
     "Web": "1.0.0-*"

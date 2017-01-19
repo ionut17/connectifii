@@ -8,6 +8,15 @@ namespace Infrastructure
 {
     public class StudentRepository : AbstractRepository<Student>, IStudentRepository<Student>
     {
+        public StudentRepository(BaseContext context)
+        {
+            Context = context;
+        }
+
+        public StudentRepository()
+        {
+        }
+
         public ICollection<Student> GetByIds(ICollection<Guid?> ids)
         {
             return Context.Students.Where(s => ids.Contains(s.Id)).ToList();

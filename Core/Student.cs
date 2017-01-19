@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
 
 namespace Core
 {
@@ -26,6 +27,7 @@ namespace Core
 
         public Group Group { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<StudentCourse> StudentCourses { get; set; } = new List<StudentCourse>();
     }
 }
